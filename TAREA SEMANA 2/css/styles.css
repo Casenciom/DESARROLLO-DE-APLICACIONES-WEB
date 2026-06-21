@@ -1,0 +1,90 @@
+/* GENERAL */
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f1f3;
+}
+
+/* HEADER */
+header {
+    background-color: #880e4f;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    width: 100%;
+}
+
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+}
+
+header p {
+    margin-top: 10px;
+}
+
+/* SECCIONES */
+section {
+    padding: 40px 0;
+}
+
+/* CARD */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 5px 10px gray;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* IMAGEN CENTRADA */
+.imagen-nosotros {
+    display: block;
+    margin: 0 auto;
+    border-radius: 40px;
+    box-shadow: 0 0 10px black;
+}
+
+/* ASIDE */
+aside {
+    background-color: #ffe4ec;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* FOOTER */
+footer {
+    background-color: #880e4f;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* BOTONES */
+.btn {
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    header {
+        padding: 30px;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+}
