@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>D´Patty Confecciones</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="text-center">
+    <h1>D´Patty Confecciones</h1>
+    <p>Moda, elegancia y calidad en cada prenda</p>
+</header>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <a class="navbar-brand" href="#">D´Patty</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#inicio">Inicio</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#quienes-somos">Quiénes Somos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#servicios">Servicios o Productos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">Contacto</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</nav>
+
+<!-- MAIN -->
+<main class="container">
+
+    <!-- INICIO -->
+    <section id="inicio" class="text-center my-5">
+        <h2>Inicio</h2>
+        <p>
+            Bienvenido a D´Patty Confecciones, donde creamos prendas modernas,
+            elegantes y personalizadas.
+        </p>
+
+        <a href="#contacto" class="btn btn-danger">Contáctanos</a>
+    </section>
+
+    <!-- QUIÉNES SOMOS -->
+    <section id="quienes-somos" class="row align-items-center my-5">
+
+        <div class="col-md-6">
+            <h2>Quiénes Somos</h2>
+            <p>
+                Somos una empresa dedicada al diseño y confección de prendas de vestir
+                con calidad, estilo y atención personalizada.
+            </p>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <img src="img/logopm.png"
+                 alt="Confección de prendas de vestir"
+                 width="500"
+                 class="imagen-nosotros">
+        </div>
+
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="my-5">
+
+        <h2 class="text-center mb-4">Servicios o Productos</h2>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h5>Ropa personalizada</h5>
+                    <p>Diseños exclusivos según el cliente.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h5>Uniformes</h5>
+                    <p>Confección de uniformes empresariales.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h5>Arreglos</h5>
+                    <p>Modificación y ajustes de prendas.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="my-5">
+
+        <h2 class="text-center">Contacto</h2>
+
+        <form>
+
+            <input type="text" class="form-control my-2" placeholder="Nombre">
+
+            <input type="email" class="form-control my-2" placeholder="Correo electrónico">
+
+            <input type="text" class="form-control my-2" placeholder="Asunto">
+
+            <textarea class="form-control my-2" rows="5" placeholder="Mensaje"></textarea>
+
+            <button type="submit" class="btn btn-danger">
+                Enviar mensaje
+            </button>
+
+        </form>
+
+        <div class="text-center mt-3">
+
+            <a href="https://www.tiktok.com/@patriciamaciasmodista?is_from_webapp=1&sender_device=pc" class="btn btn-primary m-1" target="_blank">TikTok</a>
+
+            <a href="https://www.facebook.com/depattyconfecciones" class="btn btn-primary m-1" target="_blank">Facebook</a>
+
+            <a href="https://www.instagram.com/atelier_pattyconfecciones?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn btn-danger m-1" target="_blank">Instagram</a>
+
+        </div>
+
+    </section>
+
+    <section class="text-center my-5">
+
+    <h2>Video sobre confección textil</h2>
+
+    <div class="ratio ratio-16x9">
+        <iframe 
+            src="https://www.youtube.com/embed/3Xr3E3t5D-k" 
+            title="Video sobre confección textil"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+</section>
+
+<!-- REGISTRO DINÁMICO DE PRODUCTOS -->
+<section id="registro" class="my-5">
+
+    <h2 class="text-center mb-4">Registrar Productos</h2>
+
+    <form id="formProducto">
+
+        <input
+            type="text"
+            id="nombre"
+            class="form-control my-2"
+            placeholder="Nombre del producto">
+
+        <textarea
+            id="descripcion"
+            class="form-control my-2"
+            placeholder="Descripción"></textarea>
+
+        <input
+            type="text"
+            id="categoria"
+            class="form-control my-2"
+            placeholder="Categoría">
+
+        <button class="btn btn-success" type="submit">
+            Agregar Producto
+        </button>
+
+    </form>
+
+    <div id="mensaje" class="mt-3"></div>
+
+    <h4 class="mt-4">
+        Total de productos:
+        <span id="total">0</span>
+    </h4>
+
+    <div id="listaProductos" class="mt-4"></div>
+
+</section>
+
+    
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+    <p>Carlos Asencio Miranda 
+        Materia: Desarrollo de Aplicaciones Web Avance de proyecto  UEA
+    </p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="js/script.js"></script>
+
+
+</body>
+
+</html>
