@@ -16,14 +16,22 @@
 
 <body>
 
-<!-- HEADER -->
+<!-- ================================================= -->
+<!-- FUTURO base.html -->
+<!-- Esta página se convertirá posteriormente en la plantilla base de Flask -->
+<!-- Aquí se incluirán el encabezado, menú, contenido y pie de página -->
+<!-- ================================================= -->
 
 <header class="text-center">
     <h1>D´Patty Confecciones</h1>
     <p>Moda, elegancia y calidad en cada prenda</p>
 </header>
 
-<!-- NAVBAR -->
+<!-- ====================================== -->
+<!-- FUTURO navbar.html -->
+<!-- Menú de navegación reutilizable -->
+<!-- ====================================== -->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
@@ -50,6 +58,10 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="#registro">Registrar Productos</a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="#contacto">Contacto</a>
                 </li>
 
@@ -60,7 +72,11 @@
     </div>
 </nav>
 
-<!-- MAIN -->
+<!-- ====================================== -->
+<!-- CONTENIDO PRINCIPAL -->
+<!-- En Flask esta sección será {% block content %} -->
+<!-- ====================================== -->
+
 <main class="container">
 
     <!-- INICIO -->
@@ -71,7 +87,9 @@
             elegantes y personalizadas.
         </p>
 
-        <a href="#contacto" class="btn btn-danger">Contáctanos</a>
+        <a href="#registro" class="btn btn-danger">
+            Registrar Producto
+        </a>
     </section>
 
     <!-- QUIÉNES SOMOS -->
@@ -97,7 +115,7 @@
     <!-- SERVICIOS -->
     <section id="servicios" class="my-5">
 
-        <h2 class="text-center mb-4">Servicios o Productos</h2>
+        <h2 class="text-center mb-4">Servicios y Productos</h2>
 
         <div class="row">
 
@@ -111,7 +129,7 @@
             <div class="col-md-4">
                 <div class="card p-3">
                     <h5>Uniformes</h5>
-                    <p>Confección de uniformes empresariales.</p>
+                    <p>Confección de uniformes empresariales,escolares e institucionales.</p>
                 </div>
             </div>
 
@@ -186,7 +204,8 @@
     <input
         type="text"
         id="nombre"
-        class="form-control">
+        class="form-control"
+        placeholder="Ingrese el nombre del producto">
 
     <small id="errorNombre" class="text-danger"></small>
 
@@ -196,7 +215,8 @@
     <textarea
         id="descripcion"
         class="form-control"
-        rows="4"></textarea>
+        rows="4"
+        placeholder="Ingrese la descripción del producto"></textarea>
 
     <small id="errorDescripcion" class="text-danger"></small>
 
@@ -239,8 +259,23 @@
     Total de productos:
     <span id="total">0</span>
 </h4>
+    <hr class="my-5">
 
-<div id="listaProductos"></div>
+        <!-- CONTENIDO DINÁMICO -->
+
+        <h3 class="text-center mb-4">
+
+            Productos Registrados
+
+        </h3>
+
+        <!-- Mensaje cuando no existan productos -->
+
+        <div id="estadoProductos"></div>
+
+        <!-- Las tarjetas se generan desde JavaScript -->
+
+        <div id="listaProductos" class="row"></div>
 
 </section>
 

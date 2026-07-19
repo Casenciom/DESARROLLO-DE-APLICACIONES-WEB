@@ -1,207 +1,243 @@
 
-// OBTENER ELEMENTOS
-
+// ==========================
+// OBTENER ELEMENTOS DEL HTML
+// ==========================
 
 const formulario = document.getElementById("formProducto");
 
 const nombre = document.getElementById("nombre");
-
 const descripcion = document.getElementById("descripcion");
-
 const categoria = document.getElementById("categoria");
 
 const errorNombre = document.getElementById("errorNombre");
-
 const errorDescripcion = document.getElementById("errorDescripcion");
-
 const errorCategoria = document.getElementById("errorCategoria");
-
-const listaProductos = document.getElementById("listaProductos");
-
-const total = document.getElementById("total");
 
 const mensaje = document.getElementById("mensaje");
 
-let contador = 0;
+const listaProductos = document.getElementById("listaProductos");
+const estadoProductos = document.getElementById("estadoProductos");
 
+const total = document.getElementById("total");
 
+// ==========================
+// ARREGLO DE PRODUCTOS
+// ==========================
+
+let productos = [];
+
+// ==========================
 // VALIDAR NOMBRE
+// ==========================
 
+function validarNombre() {
 
-function validarNombre(){
+    if (nombre.value.trim().length < 3) {
 
-    if(nombre.value.trim().length < 3){
-
-        errorNombre.textContent="Debe tener mínimo 3 caracteres.";
+        errorNombre.textContent = "Debe ingresar mínimo 3 caracteres.";
 
         nombre.classList.add("is-invalid");
-
         nombre.classList.remove("is-valid");
 
         return false;
-
     }
 
-    errorNombre.textContent="";
+    errorNombre.textContent = "";
 
     nombre.classList.remove("is-invalid");
-
     nombre.classList.add("is-valid");
 
     return true;
-
 }
 
-
+// ==========================
 // VALIDAR DESCRIPCIÓN
+// ==========================
 
+function validarDescripcion() {
 
-function validarDescripcion(){
+    if (descripcion.value.trim().length < 15) {
 
-    if(descripcion.value.trim().length < 15){
-
-        errorDescripcion.textContent="La descripción debe tener mínimo 15 caracteres.";
+        errorDescripcion.textContent = "La descripción debe tener mínimo 15 caracteres.";
 
         descripcion.classList.add("is-invalid");
-
         descripcion.classList.remove("is-valid");
 
         return false;
-
     }
 
-    errorDescripcion.textContent="";
+    errorDescripcion.textContent = "";
 
     descripcion.classList.remove("is-invalid");
-
     descripcion.classList.add("is-valid");
 
     return true;
-
 }
 
-
+// ==========================
 // VALIDAR CATEGORÍA
+// ==========================
 
+function validarCategoria() {
 
-function validarCategoria(){
+    if (categoria.value == "") {
 
-    if(categoria.value==""){
-
-        errorCategoria.textContent="Seleccione una categoría.";
+        errorCategoria.textContent = "Seleccione una categoría.";
 
         categoria.classList.add("is-invalid");
-
         categoria.classList.remove("is-valid");
 
         return false;
-
     }
 
-    errorCategoria.textContent="";
+    errorCategoria.textContent = "";
 
     categoria.classList.remove("is-invalid");
-
     categoria.classList.add("is-valid");
 
     return true;
+}
+
+// ==========================
+// MOSTRAR PRODUCTOS
+// ==========================
+
+function mostrarProductos() {
+
+    listaProductos.innerHTML = "";
+
+    if (productos.length === 0) {
+
+        estadoProductos.innerHTML = `
+        <div class="alert alert-warning">
+            No existen productos registrados.
+        </div>
+        `;
+
+    } else {
+
+        estadoProductos.innerHTML = "";
+
+    }
+
+    productos.forEach(function (producto, indice) {
+
+        const columna = document.createElement("div");
+
+        columna.className = "col-md-4 mb-3";
+
+        columna.innerHTML = `
+
+        <div class="card p-3 h-100">
+
+            <h5>${producto.nombre}</h5>
+
+            <p>${producto.descripcion}</p>
+
+            <p><strong>Categoría:</strong> ${producto.categoria}</p>
+
+            <button class="btn btn-danger">
+                Eliminar
+            </button>
+
+        </div>
+
+        `;
+
+        const botonEliminar = columna.querySelector("button");
+
+        botonEliminar.addEventListener("click", function () {
+
+            productos.splice(indice, 1);
+
+            mostrarProductos();
+
+        });
+
+        listaProductos.appendChild(columna);
+
+    });
+
+    total.textContent = productos.length;
 
 }
 
-
+// ==========================
 // EVENTOS EN TIEMPO REAL
+// ==========================
 
+nombre.addEventListener("input", validarNombre);
+nombre.addEventListener("blur", validarNombre);
 
-nombre.addEventListener("input",validarNombre);
+descripcion.addEventListener("input", validarDescripcion);
+descripcion.addEventListener("blur", validarDescripcion);
 
-nombre.addEventListener("blur",validarNombre);
+categoria.addEventListener("change", validarCategoria);
+categoria.addEventListener("blur", validarCategoria);
 
-descripcion.addEventListener("input",validarDescripcion);
-
-descripcion.addEventListener("blur",validarDescripcion);
-
-categoria.addEventListener("change",validarCategoria);
-
-categoria.addEventListener("blur",validarCategoria);
-
-
+// ==========================
 // ENVIAR FORMULARIO
+// ==========================
 
-
-formulario.addEventListener("submit",function(event){
+formulario.addEventListener("submit", function (event) {
 
     event.preventDefault();
 
-    let nombreValido=validarNombre();
+    const nombreValido = validarNombre();
+    const descripcionValida = validarDescripcion();
+    const categoriaValida = validarCategoria();
 
-    let descripcionValida=validarDescripcion();
+    if (!(nombreValido && descripcionValida && categoriaValida)) {
 
-    let categoriaValida=validarCategoria();
-
-    if(!(nombreValido && descripcionValida && categoriaValida)){
-
-        mensaje.innerHTML=`
+        mensaje.innerHTML = `
         <div class="alert alert-danger">
-        Corrija los errores del formulario.
+            Corrija los errores antes de registrar el producto.
         </div>
         `;
 
         return;
-
     }
 
-    mensaje.innerHTML=`
+    // Crear objeto
+
+    const producto = {
+
+        nombre: nombre.value,
+
+        descripcion: descripcion.value,
+
+        categoria: categoria.value
+
+    };
+
+    // Guardar en el arreglo
+
+    productos.push(producto);
+
+    // Mostrar mensaje
+
+    mensaje.innerHTML = `
     <div class="alert alert-success">
-    Producto registrado correctamente.
+        Producto registrado correctamente.
     </div>
     `;
 
-    // Crear tarjeta
+    // Actualizar la lista
 
-    let tarjeta=document.createElement("div");
+    mostrarProductos();
 
-    tarjeta.className="card p-3 mt-3";
-
-    tarjeta.innerHTML=`
-
-        <h5>${nombre.value}</h5>
-
-        <p>${descripcion.value}</p>
-
-        <p><strong>Categoría:</strong> ${categoria.value}</p>
-
-        <button class="btn btn-danger btnEliminar">
-            Eliminar
-        </button>
-
-    `;
-
-    listaProductos.appendChild(tarjeta);
-
-    contador++;
-
-    total.textContent=contador;
-
-    // Eliminar producto
-
-    let botonEliminar=tarjeta.querySelector(".btnEliminar");
-
-    botonEliminar.addEventListener("click",function(){
-
-        tarjeta.remove();
-
-        contador--;
-
-        total.textContent=contador;
-
-    });
+    // Limpiar formulario
 
     formulario.reset();
 
     nombre.classList.remove("is-valid");
-
     descripcion.classList.remove("is-valid");
-
     categoria.classList.remove("is-valid");
 
 });
+
+// ==========================
+// CARGAR LA PÁGINA
+// ==========================
+
+mostrarProductos();

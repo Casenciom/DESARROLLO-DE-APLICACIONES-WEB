@@ -87,3 +87,28 @@ footer {
         margin-bottom: 15px;
     }
 }
+
+/* REGISTRO DE PRODUCTOS */
+
+#registro form{
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#listaProductos{
+    margin-top: 30px;
+}
+
+#estadoProductos{
+    margin-bottom: 20px;
+}
+
+.card h5{
+    color: #880e4f;
+}
+
+.card{
+    height: 100%;
+}
