@@ -21,6 +21,21 @@ const estadoProductos = document.getElementById("estadoProductos");
 const total = document.getElementById("total");
 
 // ==========================
+// NUEVOS ELEMENTOS BOOTSTRAP
+// ==========================
+
+const spinner = document.getElementById("spinner");
+
+const modalEliminar = new bootstrap.Modal(
+    document.getElementById("modalEliminar")
+);
+
+const confirmarEliminar =
+document.getElementById("confirmarEliminar");
+
+let indiceEliminar = null;
+
+// ==========================
 // ARREGLO DE PRODUCTOS
 // ==========================
 
@@ -146,14 +161,13 @@ function mostrarProductos() {
 
         const botonEliminar = columna.querySelector("button");
 
-        botonEliminar.addEventListener("click", function () {
+botonEliminar.addEventListener("click", function () {
 
-            productos.splice(indice, 1);
+    indiceEliminar = indice;
 
-            mostrarProductos();
+    modalEliminar.show();
 
-        });
-
+});
         listaProductos.appendChild(columna);
 
     });
@@ -190,10 +204,21 @@ formulario.addEventListener("submit", function (event) {
     if (!(nombreValido && descripcionValida && categoriaValida)) {
 
         mensaje.innerHTML = `
-        <div class="alert alert-danger">
-            Corrija los errores antes de registrar el producto.
-        </div>
-        `;
+
+<div class="alert alert-danger alert-dismissible fade show">
+
+<strong>Error.</strong>
+
+Corrija los campos antes de registrar.
+
+<button
+class="btn-close"
+data-bs-dismiss="alert">
+</button>
+
+</div>
+
+`;
 
         return;
     }
@@ -210,23 +235,38 @@ formulario.addEventListener("submit", function (event) {
 
     };
 
-    // Guardar en el arreglo
+    // Mostrar Spinner
+
+spinner.classList.remove("d-none");
+
+// Simular carga
+
+setTimeout(function(){
 
     productos.push(producto);
 
-    // Mostrar mensaje
+    spinner.classList.add("d-none");
 
-    mensaje.innerHTML = `
-    <div class="alert alert-success">
-        Producto registrado correctamente.
-    </div>
+    mensaje.innerHTML=`
+
+    <div class="alert alert-success alert-dismissible fade show">
+
+<strong>Éxito.</strong>
+
+Producto registrado correctamente.
+
+<button
+class="btn-close"
+data-bs-dismiss="alert">
+</button>
+
+</div>
+
     `;
-
-    // Actualizar la lista
 
     mostrarProductos();
 
-    // Limpiar formulario
+},1500);
 
     formulario.reset();
 
@@ -241,3 +281,23 @@ formulario.addEventListener("submit", function (event) {
 // ==========================
 
 mostrarProductos();
+
+// ==========================
+// CONFIRMAR ELIMINACIÓN
+// ==========================
+
+confirmarEliminar.addEventListener("click", function(){
+
+    if(indiceEliminar !== null){
+
+        productos.splice(indiceEliminar,1);
+
+        mostrarProductos();
+
+        modalEliminar.hide();
+
+        indiceEliminar = null;
+
+    }
+
+});

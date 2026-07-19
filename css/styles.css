@@ -1,13 +1,24 @@
 /* GENERAL */
 
 body {
+
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f8f1f3;
+
+    background-image: url("../img/fondo.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
 }
 
 /* HEADER */
 header {
-    background-color: #880e4f;
+    background-color: #dd8db9;
     color: white;
     text-align: center;
     padding: 50px;
@@ -111,4 +122,125 @@ footer {
 
 .card{
     height: 100%;
+}
+
+/* ================================================= */
+/* SEMANA 8 - MEJORAS CON BOOTSTRAP                  */
+/* ================================================= */
+
+/* Tarjeta del formulario */
+
+#registro .card{
+
+    border: none;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+
+/* Encabezado del formulario */
+
+#registro .card-header{
+
+    background-color: #880e4f !important;
+
+}
+
+/* Botón registrar */
+
+#registro .btn-success{
+
+    width: 100%;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+}
+
+/* Tarjetas de productos */
+
+#listaProductos .card{
+
+    transition: all .3s;
+
+    border: none;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,.15);
+
+}
+
+#listaProductos .card:hover{
+
+    transform: translateY(-8px);
+
+}
+
+/* Título del producto */
+
+#listaProductos h5{
+
+    color:#880e4f;
+
+    font-weight:bold;
+
+}
+
+/* Spinner */
+
+#spinner{
+
+    margin:25px 0;
+
+}
+
+/* Mensajes */
+
+#mensaje{
+
+    margin-top:20px;
+
+}
+
+/* Modal */
+
+.modal-content{
+
+    border-radius:15px;
+
+}
+
+/* Contador */
+
+#total{
+
+    font-weight:bold;
+
+    color:#880e4f;
+
+    font-size:22px;
+
+}
+
+
+/* Responsive */
+
+@media (max-width:768px){
+
+    #registro .btn-success{
+
+        width:100%;
+
+    }
+
+    .imagen-nosotros{
+
+        width:100%;
+
+        height:auto;
+
+    }
+
 }
