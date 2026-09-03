@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Factura | D'Patty Confecciones{% endblock %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h2 class="text-center mb-4">
+                        Registrar factura
+                    </h2>
+
+                    <form method="POST" novalidate>
+
+                        <!-- Token CSRF -->
+                        {{ form.hidden_tag() }}
+
+
+                        <!-- CLIENTE -->
+                        <div class="mb-3">
+
+                            {{ form.cliente.label(class="form-label") }}
+
+                            {{ form.cliente(class="form-control") }}
+
+                            {% for error in form.cliente.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- PRODUCTO -->
+                        <div class="mb-3">
+
+                            {{ form.producto.label(class="form-label") }}
+
+                            {{ form.producto(class="form-control") }}
+
+                            {% for error in form.producto.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- CANTIDAD -->
+                        <div class="mb-3">
+
+                            {{ form.cantidad.label(class="form-label") }}
+
+                            {{ form.cantidad(
+                                class="form-control",
+                                min="1"
+                            ) }}
+
+                            {% for error in form.cantidad.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- TOTAL -->
+                        <div class="mb-3">
+
+                            {{ form.total.label(class="form-label") }}
+
+                            {{ form.total(
+                                class="form-control",
+                                step="0.01"
+                            ) }}
+
+                            {% for error in form.total.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- ESTADO -->
+                        <div class="mb-4">
+
+                            {{ form.estado.label(class="form-label") }}
+
+                            {{ form.estado(class="form-select") }}
+
+                            {% for error in form.estado.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
+                        <!-- BOTÓN -->
+                        <div class="d-grid">
+
+                            {{ form.submit(class="btn btn-primary") }}
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

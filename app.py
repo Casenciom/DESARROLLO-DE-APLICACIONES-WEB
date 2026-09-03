@@ -1,7 +1,14 @@
 from flask import Flask, render_template
+from forms.producto_form import ProductoForm
+from forms.cliente_form import ClienteForm
+from forms.proveedor_form import ProveedorForm
+from forms.facturacion_form import FacturacionForm
+
 
 app = Flask(__name__)
 
+# Clave secreta utilizada por Flask-WTF para la protección CSRF
+app.config["SECRET_KEY"] = "dpatty-clave-secreta-2026"
 
 # Ruta principal
 @app.route("/")
@@ -12,6 +19,8 @@ def inicio():
 # Ruta de productos
 @app.route("/productos")
 def productos():
+    
+
 
     titulo = "Catálogo de productos"
 
@@ -54,6 +63,24 @@ def productos():
         productos=lista_productos
     )
 
+# Ruta para registrar productos
+@app.route("/productos/nuevo", methods=["GET", "POST"])
+def nuevo_producto():
+
+    form = ProductoForm()
+
+    if form.validate_on_submit():
+
+        print("PRODUCTO VÁLIDO")
+        print("Nombre:", form.nombre.data)
+        print("Descripción:", form.descripcion.data)
+        print("Precio:", form.precio.data)
+        print("Disponible:", form.disponible.data)
+
+    return render_template(
+        "formulario_producto.html",
+        form=form
+    )
 
 # Ruta de clientes
 @app.route("/clientes")
@@ -83,6 +110,24 @@ def clientes():
         "clientes.html",
         titulo=titulo_clientes,
         clientes=lista_clientes
+    )
+
+# Ruta para registrar clientes
+@app.route("/clientes/nuevo", methods=["GET", "POST"])
+def nuevo_cliente():
+
+    form = ClienteForm()
+
+    if form.validate_on_submit():
+
+        print("CLIENTE VÁLIDO")
+        print("Nombre:", form.nombre.data)
+        print("Correo:", form.correo.data)
+        print("Tipo de cliente:", form.tipo_cliente.data)
+
+    return render_template(
+        "formulario_cliente.html",
+        form=form
     )
 
 
@@ -117,6 +162,26 @@ def proveedores():
         "proveedores.html",
         titulo=titulo_proveedores,
         proveedores=lista_proveedores
+    )
+
+
+# Ruta para registrar proveedores
+@app.route("/proveedores/nuevo", methods=["GET", "POST"])
+def nuevo_proveedor():
+
+    form = ProveedorForm()
+
+    if form.validate_on_submit():
+
+        print("PROVEEDOR VÁLIDO")
+        print("Nombre:", form.nombre.data)
+        print("Producto o insumo:", form.producto.data)
+        print("Teléfono:", form.telefono.data)
+        print("Estado:", form.estado.data)
+
+    return render_template(
+        "formulario_proveedor.html",
+        form=form
     )
 
 
@@ -156,6 +221,26 @@ def facturacion():
         facturas=lista_facturas
     )
 
+
+# Ruta para registrar facturación
+@app.route("/facturacion/nueva", methods=["GET", "POST"])
+def nueva_facturacion():
+
+    form = FacturacionForm()
+
+    if form.validate_on_submit():
+
+        print("FACTURACIÓN VÁLIDA")
+        print("Cliente:", form.cliente.data)
+        print("Producto:", form.producto.data)
+        print("Cantidad:", form.cantidad.data)
+        print("Total:", form.total.data)
+        print("Estado:", form.estado.data)
+
+    return render_template(
+        "formulario_facturacion.html",
+        form=form
+    )
 
 # Ejecutar aplicación
 if __name__ == "__main__":
