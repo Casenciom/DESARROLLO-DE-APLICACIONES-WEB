@@ -7,39 +7,100 @@
 <section class="container py-5">
 
     <div class="text-center mb-4">
-        <h2>Facturación</h2>
+
+        <h2>{{ titulo }}</h2>
 
         <p class="text-muted">
             Gestión de facturación de D'Patty Confecciones.
         </p>
+
     </div>
 
-    <div class="row justify-content-center">
 
-        <div class="col-md-8">
+    <div class="card shadow-sm">
 
-            <div class="card shadow-sm">
+        <div class="card-body">
 
-                <div class="card-body">
+            <h4 class="mb-3">
+                Facturas registradas
+            </h4>
 
-                    <h5 class="card-title">
-                        Información de facturación
-                    </h5>
 
-                    <p class="card-text">
-                        En este módulo se podrá gestionar la información
-                        relacionada con las ventas, pedidos y facturas
-                        generadas por D'Patty Confecciones.
-                    </p>
+            {% if facturas %}
 
-                    <div class="alert alert-warning">
-                        Próximamente se incorporará el registro
-                        dinámico de facturas.
-                    </div>
+            <div class="table-responsive">
 
-                </div>
+                <table class="table table-striped table-hover align-middle">
+
+                    <thead class="table-dark">
+
+                        <tr>
+                            <th>N.º Factura</th>
+                            <th>Cliente</th>
+                            <th>Producto</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for factura in facturas %}
+
+                        <tr>
+
+                            <td>
+                                {{ factura.numero }}
+                            </td>
+
+                            <td>
+                                {{ factura.cliente }}
+                            </td>
+
+                            <td>
+                                {{ factura.producto }}
+                            </td>
+
+                            <td>
+                                ${{ "%.2f"|format(factura.total) }}
+                            </td>
+
+                            <td>
+
+                                {% if factura.estado == "Pagada" %}
+
+                                <span class="badge bg-success">
+                                    {{ factura.estado }}
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-warning text-dark">
+                                    {{ factura.estado }}
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
 
             </div>
+
+            {% else %}
+
+            <div class="alert alert-info">
+                No existen facturas registradas.
+            </div>
+
+            {% endif %}
 
         </div>
 

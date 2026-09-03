@@ -7,73 +7,63 @@
 <section class="container py-5">
 
     <div class="text-center mb-4">
-        <h2>Productos</h2>
+
+        <h2>
+            {{ titulo|upper }}
+        </h2>
 
         <p class="text-muted">
-            Catálogo de prendas y productos de D'Patty Confecciones.
+            Catálogo dinámico de prendas de D'Patty Confecciones.
         </p>
+
     </div>
+
 
     <div class="row">
 
+        {% for producto in productos %}
+
         <div class="col-md-4 mb-4">
+
             <div class="card h-100 shadow-sm">
 
                 <div class="card-body text-center">
 
                     <h5 class="card-title">
-                        Vestido personalizado
+                        {{ producto.nombre }}
                     </h5>
 
                     <p class="card-text">
-                        Confección de vestidos personalizados de acuerdo
-                        con las medidas y preferencias del cliente.
+                        {{ producto.descripcion }}
                     </p>
+
+                    <p>
+                        <strong>Precio:</strong>
+                        ${{ producto.precio }}
+                    </p>
+
+
+                    {% if producto.disponible %}
+
+                    <span class="badge bg-success">
+                        Disponible
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge bg-danger">
+                        No disponible
+                    </span>
+
+                    {% endif %}
 
                 </div>
 
             </div>
+
         </div>
 
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-
-                <div class="card-body text-center">
-
-                    <h5 class="card-title">
-                        Blusa
-                    </h5>
-
-                    <p class="card-text">
-                        Blusas confeccionadas con diferentes diseños,
-                        estilos y tipos de tela.
-                    </p>
-
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-
-                <div class="card-body text-center">
-
-                    <h5 class="card-title">
-                        Falda
-                    </h5>
-
-                    <p class="card-text">
-                        Faldas elaboradas a medida según los
-                        requerimientos del cliente.
-                    </p>
-
-                </div>
-
-            </div>
-        </div>
+        {% endfor %}
 
     </div>
 

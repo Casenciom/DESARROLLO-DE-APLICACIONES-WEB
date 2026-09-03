@@ -31,74 +31,7 @@
     </header>
 
 
-    <!-- MENÚ DE NAVEGACIÓN -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-        <div class="container">
-
-            <a class="navbar-brand"
-               href="{{ url_for('inicio') }}">
-                D'Patty
-            </a>
-
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#menuPrincipal">
-
-                <span class="navbar-toggler-icon"></span>
-
-            </button>
-
-            <div
-                class="collapse navbar-collapse"
-                id="menuPrincipal">
-
-                <ul class="navbar-nav ms-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="{{ url_for('inicio') }}">
-                            Inicio
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="{{ url_for('productos') }}">
-                            Productos
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="{{ url_for('clientes') }}">
-                            Clientes
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="{{ url_for('proveedores') }}">
-                            Proveedores
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link"
-                           href="{{ url_for('facturacion') }}">
-                            Facturación
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </nav>
+    {% include "components/navbar.html" %}
 
 
     <!-- CONTENIDO PRINCIPAL -->
@@ -109,20 +42,8 @@
 
     </main>
 
-
-    <!-- PIE DE PÁGINA -->
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-
-        <p class="mb-1">
-            D'Patty Confecciones
-        </p>
-
-        <p class="mb-0">
-            Proyecto Integrador - Desarrollo de Aplicaciones Web
-        </p>
-
-    </footer>
-
+   <!-- COMPONENTE DE PIE DE PÁGINA -->
+    {% include "components/footer.html" %}
 
     <!-- Bootstrap JavaScript -->
     <script

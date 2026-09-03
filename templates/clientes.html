@@ -7,39 +7,88 @@
 <section class="container py-5">
 
     <div class="text-center mb-4">
-        <h2>Clientes</h2>
+
+        <h2>{{ titulo }}</h2>
 
         <p class="text-muted">
             Gestión de clientes de D'Patty Confecciones.
         </p>
+
     </div>
 
-    <div class="row justify-content-center">
+    <div class="card shadow-sm">
 
-        <div class="col-md-8">
+        <div class="card-body">
 
-            <div class="card shadow-sm">
+            <h4 class="mb-3">
+                Información de clientes
+            </h4>
 
-                <div class="card-body">
+            {% if clientes %}
 
-                    <h5 class="card-title">
-                        Información de clientes
-                    </h5>
+            <div class="table-responsive">
 
-                    <p class="card-text">
-                        En este módulo se podrá registrar y consultar
-                        la información de los clientes que solicitan
-                        prendas y servicios de confección.
-                    </p>
+                <table class="table table-striped table-hover align-middle">
 
-                    <div class="alert alert-info">
-                        Próximamente se incorporará el registro
-                        dinámico de clientes.
-                    </div>
+                    <thead class="table-dark">
 
-                </div>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo electrónico</th>
+                            <th>Tipo de cliente</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for cliente in clientes %}
+
+                        <tr>
+
+                            <td>
+                                {{ cliente.nombre }}
+                            </td>
+
+                            <td>
+                                {{ cliente.correo }}
+                            </td>
+
+                            <td>
+
+                                {% if cliente.tipo_cliente == "Frecuente" %}
+
+                                <span class="badge bg-success">
+                                    {{ cliente.tipo_cliente }}
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-primary">
+                                    {{ cliente.tipo_cliente }}
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
 
             </div>
+
+            {% else %}
+
+            <div class="alert alert-info">
+                No existen clientes registrados.
+            </div>
+
+            {% endif %}
 
         </div>
 
