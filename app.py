@@ -1,11 +1,42 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, flash
 from forms.producto_form import ProductoForm
 from forms.cliente_form import ClienteForm
 from forms.proveedor_form import ProveedorForm
 from forms.facturacion_form import FacturacionForm
 
 
+import sqlite3
+import os
+
 app = Flask(__name__)
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+DB_PATH = os.path.join(
+    BASE_DIR,
+    "data",
+    "dpatty.db"
+)
+
+def inicializar_bd():
+    
+    conexion = sqlite3.connect(DB_PATH)
+
+    cursor = conexion.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS productos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nombre TEXT NOT NULL,
+            descripcion TEXT NOT NULL,
+            precio REAL NOT NULL,
+            disponible INTEGER NOT NULL
+        )
+    """)
+
+    conexion.commit()
+
+    conexion.close()
 
 # Clave secreta utilizada por Flask-WTF para la protección CSRF
 app.config["SECRET_KEY"] = "dpatty-clave-secreta-2026"
@@ -19,49 +50,29 @@ def inicio():
 # Ruta de productos
 @app.route("/productos")
 def productos():
-    
 
+    conexion = sqlite3.connect(DB_PATH)
 
-    titulo = "Catálogo de productos"
+    conexion.row_factory = sqlite3.Row
 
-    lista_productos = [
-        {
-            "nombre": "Vestido personalizado",
-            "descripcion": "Confección de vestidos personalizados de acuerdo con las medidas y preferencias del cliente.",
-            "precio": 45.00,
-            "disponible": True
-        },
-        {
-            "nombre": "Blusa",
-            "descripcion": "Blusas confeccionadas con diferentes diseños, estilos y tipos de tela.",
-            "precio": 25.00,
-            "disponible": True
-        },
-        {
-            "nombre": "Falda",
-            "descripcion": "Faldas elaboradas a medida según los requerimientos del cliente.",
-            "precio": 30.00,
-            "disponible": True
-        },
-        {
-            "nombre": "Uniforme",
-            "descripcion": "Confección de uniformes personalizados para empresas e instituciones.",
-            "precio": 40.00,
-            "disponible": False
-        },
-        {
-            "nombre": "Conjunto",
-            "descripcion": "Conjunto personalizado confeccionado según el estilo y medidas del cliente.",
-            "precio": 55.00,
-            "disponible": True
-        }
-    ]
+    cursor = conexion.cursor()
+
+    cursor.execute("""
+        SELECT id, nombre, descripcion, precio, disponible
+        FROM productos
+        ORDER BY id DESC
+    """)
+
+    lista_productos = cursor.fetchall()
+
+    conexion.close()
 
     return render_template(
         "productos.html",
-        titulo=titulo,
+        titulo="Productos D'Patty Confecciones",
         productos=lista_productos
     )
+    
 
 # Ruta para registrar productos
 @app.route("/productos/nuevo", methods=["GET", "POST"])
@@ -71,11 +82,35 @@ def nuevo_producto():
 
     if form.validate_on_submit():
 
-        print("PRODUCTO VÁLIDO")
-        print("Nombre:", form.nombre.data)
-        print("Descripción:", form.descripcion.data)
-        print("Precio:", form.precio.data)
-        print("Disponible:", form.disponible.data)
+        conexion = sqlite3.connect(DB_PATH)
+
+        cursor = conexion.cursor()
+
+        cursor.execute(
+            """
+            INSERT INTO productos (
+                nombre,
+                descripcion,
+                precio,
+                disponible
+            )
+            VALUES (?, ?, ?, ?)
+            """,
+            (
+                form.nombre.data,
+                form.descripcion.data,
+                float(form.precio.data),
+                1 if form.disponible.data else 0
+            )
+        )
+
+        conexion.commit()
+
+        conexion.close()
+
+        print("PRODUCTO GUARDADO EN SQLITE")
+        flash("Producto guardado correctamente.", "success")
+        return redirect(url_for("productos"))
 
     return render_template(
         "formulario_producto.html",
@@ -244,4 +279,7 @@ def nueva_facturacion():
 
 # Ejecutar aplicación
 if __name__ == "__main__":
+    
+    inicializar_bd()
+
     app.run(debug=True)

@@ -1,72 +1,133 @@
 {% extends "base.html" %}
 
-{% block title %}Productos | D'Patty Confecciones{% endblock %}
-
 {% block content %}
 
-<section class="container py-5">
+{% with mensajes = get_flashed_messages(with_categories=true) %}
 
-    <div class="text-center mb-4">
+    {% if mensajes %}
 
-        <h2>
-            {{ titulo|upper }}
-        </h2>
+        {% for categoria, mensaje in mensajes %}
 
-        <p class="text-muted">
-            Catálogo dinámico de prendas de D'Patty Confecciones.
-        </p>
+            <div class="container mt-4">
+                <div class="alert alert-{{ categoria }} alert-dismissible fade show" role="alert">
 
-    </div>
+                    {{ mensaje }}
 
-
-    <div class="row">
-
-        {% for producto in productos %}
-
-        <div class="col-md-4 mb-4">
-
-            <div class="card h-100 shadow-sm">
-
-                <div class="card-body text-center">
-
-                    <h5 class="card-title">
-                        {{ producto.nombre }}
-                    </h5>
-
-                    <p class="card-text">
-                        {{ producto.descripcion }}
-                    </p>
-
-                    <p>
-                        <strong>Precio:</strong>
-                        ${{ producto.precio }}
-                    </p>
-
-
-                    {% if producto.disponible %}
-
-                    <span class="badge bg-success">
-                        Disponible
-                    </span>
-
-                    {% else %}
-
-                    <span class="badge bg-danger">
-                        No disponible
-                    </span>
-
-                    {% endif %}
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Cerrar">
+                    </button>
 
                 </div>
-
             </div>
-
-        </div>
 
         {% endfor %}
 
+    {% endif %}
+
+{% endwith %}
+
+
+
+<div class="container py-5">
+
+    <div class="text-center mb-4">
+
+        <h2>{{ titulo|upper }}</h2>
+
+        <p>
+            Productos registrados en D'Patty Confecciones.
+        </p>
+
+        <a
+            href="{{ url_for('nuevo_producto') }}"
+            class="btn btn-primary"
+        >
+            Registrar nuevo producto
+        </a>
+
     </div>
 
-</section>
+    {% if productos %}
+
+    <div class="table-responsive">
+
+        <table class="table table-striped table-bordered align-middle">
+
+            <thead class="table-dark">
+
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Estado</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for producto in productos %}
+
+                <tr>
+
+                    <td>
+                        {{ producto.id }}
+                    </td>
+
+                    <td>
+                        {{ producto.nombre }}
+                    </td>
+
+                    <td>
+                        {{ producto.descripcion }}
+                    </td>
+
+                    <td>
+                        ${{ producto.precio }}
+                    </td>
+
+                    <td>
+
+                        {% if producto.disponible %}
+
+                            <span class="badge bg-success">
+                                Disponible
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                No disponible
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+        <div class="alert alert-info text-center">
+
+            No existen productos registrados.
+
+        </div>
+
+    {% endif %}
+
+</div>
 
 {% endblock %}
