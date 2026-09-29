@@ -14,8 +14,13 @@
             Gestión de proveedores de D'Patty Confecciones.
         </p>
 
-    </div>
+        <!-- BOTÓN NUEVO PROVEEDOR -->
+        <a href="{{ url_for('nuevo_proveedor') }}"
+           class="btn btn-primary mt-2">
+            Registrar nuevo proveedor
+        </a>
 
+    </div>
 
     <div class="card shadow-sm">
 
@@ -24,7 +29,6 @@
             <h4 class="mb-3">
                 Información de proveedores
             </h4>
-
 
             {% if proveedores %}
 
@@ -35,10 +39,11 @@
                     <thead class="table-dark">
 
                         <tr>
+                            <th>ID</th>
                             <th>Proveedor</th>
-                            <th>Producto o insumo</th>
                             <th>Teléfono</th>
-                            <th>Estado</th>
+                            <th>Correo electrónico</th>
+                            <th>Acciones</th>
                         </tr>
 
                     </thead>
@@ -50,11 +55,11 @@
                         <tr>
 
                             <td>
-                                {{ proveedor.nombre }}
+                                {{ proveedor.id_proveedor }}
                             </td>
 
                             <td>
-                                {{ proveedor.producto }}
+                                {{ proveedor.nombre }}
                             </td>
 
                             <td>
@@ -62,20 +67,31 @@
                             </td>
 
                             <td>
+                                {{ proveedor.correo }}
+                            </td>
 
-                                {% if proveedor.estado == "Activo" %}
+                            <td>
 
-                                <span class="badge bg-success">
-                                    {{ proveedor.estado }}
-                                </span>
+                                <a
+                                    href="{{ url_for('editar_proveedor', id_proveedor=proveedor.id_proveedor) }}"
+                                    class="btn btn-sm btn-warning"
+                                >
+                                    Editar
+                                </a>
 
-                                {% else %}
-
-                                <span class="badge bg-danger">
-                                    {{ proveedor.estado }}
-                                </span>
-
-                                {% endif %}
+                                <form
+                                    action="{{ url_for('eliminar_proveedor', id_proveedor=proveedor.id_proveedor) }}"
+                                    method="POST"
+                                    class="d-inline"
+                                    onsubmit="return confirm('¿Está seguro de eliminar este proveedor?');"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-danger"
+                                    >
+                                        Eliminar
+                                    </button>
+                                </form>
 
                             </td>
 

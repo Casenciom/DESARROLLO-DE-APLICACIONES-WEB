@@ -14,6 +14,12 @@
             Gestión de facturación de D'Patty Confecciones.
         </p>
 
+        <!-- BOTÓN PARA REGISTRAR FACTURA -->
+        <a href="{{ url_for('nueva_facturacion') }}"
+           class="btn btn-primary mt-2">
+            Registrar nueva factura
+        </a>
+
     </div>
 
 
@@ -38,11 +44,14 @@
                             <th>N.º Factura</th>
                             <th>Cliente</th>
                             <th>Producto</th>
+                            <th>Cantidad</th>
                             <th>Total</th>
                             <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
 
                     </thead>
+
 
                     <tbody>
 
@@ -50,22 +59,37 @@
 
                         <tr>
 
+                            <!-- ID DE LA FACTURA -->
                             <td>
-                                {{ factura.numero }}
+                                {{ factura.id_factura }}
                             </td>
 
+
+                            <!-- CLIENTE -->
                             <td>
                                 {{ factura.cliente }}
                             </td>
 
+
+                            <!-- PRODUCTO -->
                             <td>
                                 {{ factura.producto }}
                             </td>
 
+
+                            <!-- CANTIDAD -->
+                            <td>
+                                {{ factura.cantidad }}
+                            </td>
+
+
+                            <!-- TOTAL -->
                             <td>
                                 ${{ "%.2f"|format(factura.total) }}
                             </td>
 
+
+                            <!-- ESTADO -->
                             <td>
 
                                 {% if factura.estado == "Pagada" %}
@@ -84,6 +108,31 @@
 
                             </td>
 
+                            <td>
+
+                                <a
+                                    href="{{ url_for('editar_facturacion', id_factura=factura.id_factura) }}"
+                                    class="btn btn-sm btn-warning"
+                                >
+                                    Editar
+                                </a>
+
+                                <form
+                                    action="{{ url_for('eliminar_facturacion', id_factura=factura.id_factura) }}"
+                                    method="POST"
+                                    class="d-inline"
+                                    onsubmit="return confirm('¿Está seguro de eliminar esta factura?');"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-danger"
+                                    >
+                                        Eliminar
+                                    </button>
+                                </form>
+
+                            </td>
+
                         </tr>
 
                         {% endfor %}
@@ -93,6 +142,7 @@
                 </table>
 
             </div>
+
 
             {% else %}
 

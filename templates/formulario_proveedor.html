@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Registrar Proveedor | D'Patty Confecciones{% endblock %}
+{% block title %}
+{{ titulo if titulo else "Registrar Proveedor" }} | D'Patty Confecciones
+{% endblock %}
 
 {% block content %}
 
@@ -15,14 +17,13 @@
                 <div class="card-body p-4">
 
                     <h2 class="text-center mb-4">
-                        Registrar proveedor
+                        {{ titulo if titulo else "Registrar proveedor" }}
                     </h2>
 
                     <form method="POST" novalidate>
 
                         <!-- Token CSRF -->
                         {{ form.hidden_tag() }}
-
 
                         <!-- NOMBRE -->
                         <div class="mb-3">
@@ -32,33 +33,12 @@
                             {{ form.nombre(class="form-control") }}
 
                             {% for error in form.nombre.errors %}
-
-                            <div class="text-danger mt-1">
-                                {{ error }}
-                            </div>
-
+                                <div class="text-danger mt-1">
+                                    {{ error }}
+                                </div>
                             {% endfor %}
 
                         </div>
-
-
-                        <!-- PRODUCTO O INSUMO -->
-                        <div class="mb-3">
-
-                            {{ form.producto.label(class="form-label") }}
-
-                            {{ form.producto(class="form-control") }}
-
-                            {% for error in form.producto.errors %}
-
-                            <div class="text-danger mt-1">
-                                {{ error }}
-                            </div>
-
-                            {% endfor %}
-
-                        </div>
-
 
                         <!-- TELÉFONO -->
                         <div class="mb-3">
@@ -68,38 +48,47 @@
                             {{ form.telefono(class="form-control") }}
 
                             {% for error in form.telefono.errors %}
-
-                            <div class="text-danger mt-1">
-                                {{ error }}
-                            </div>
-
+                                <div class="text-danger mt-1">
+                                    {{ error }}
+                                </div>
                             {% endfor %}
 
                         </div>
 
-
-                        <!-- ESTADO -->
+                        <!-- CORREO -->
                         <div class="mb-4">
 
-                            {{ form.estado.label(class="form-label") }}
+                            {{ form.correo.label(class="form-label") }}
 
-                            {{ form.estado(class="form-select") }}
+                            {{ form.correo(class="form-control") }}
 
-                            {% for error in form.estado.errors %}
-
-                            <div class="text-danger mt-1">
-                                {{ error }}
-                            </div>
-
+                            {% for error in form.correo.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ error }}
+                                </div>
                             {% endfor %}
 
                         </div>
 
-
+                        
                         <!-- BOTÓN -->
                         <div class="d-grid">
 
-                            {{ form.submit(class="btn btn-primary") }}
+                            {% if titulo == "Editar proveedor" %}
+
+                                {{ form.submit(
+                                class="btn btn-warning",
+                                value="Guardar cambios"
+                            ) }}
+
+                            {% else %}
+
+                                {{ form.submit(
+                                class="btn btn-primary",
+                                value="Registrar proveedor"
+                            ) }}
+
+                            {% endif %}
 
                         </div>
 

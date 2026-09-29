@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, EmailField, SubmitField
+from wtforms.validators import DataRequired, Length, Email
 
 
 class ProveedorForm(FlaskForm):
@@ -17,38 +17,22 @@ class ProveedorForm(FlaskForm):
         ]
     )
 
-    producto = StringField(
-        "Producto o insumo",
-        validators=[
-            DataRequired(message="El producto o insumo es obligatorio."),
-            Length(
-                min=3,
-                max=150,
-                message="El producto o insumo debe tener entre 3 y 150 caracteres."
-            )
-        ]
-    )
-
     telefono = StringField(
         "Teléfono",
         validators=[
             DataRequired(message="El teléfono es obligatorio."),
             Length(
                 min=7,
-                max=15,
-                message="El teléfono debe tener entre 7 y 15 caracteres."
+                max=20,
+                message="El teléfono debe tener entre 7 y 20 caracteres."
             )
         ]
     )
 
-    estado = SelectField(
-        "Estado",
-        choices=[
-            ("Activo", "Activo"),
-            ("Inactivo", "Inactivo")
-        ],
+    correo = EmailField(
+        "Correo electrónico",
         validators=[
-            DataRequired(message="Seleccione el estado del proveedor.")
+            Email(message="Ingrese un correo electrónico válido.")
         ]
     )
 

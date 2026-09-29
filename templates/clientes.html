@@ -14,6 +14,12 @@
             Gestión de clientes de D'Patty Confecciones.
         </p>
 
+        <!-- BOTÓN NUEVO CLIENTE -->
+        <a href="{{ url_for('nuevo_cliente') }}"
+           class="btn btn-primary mt-2">
+            Registrar nuevo cliente
+        </a>
+
     </div>
 
     <div class="card shadow-sm">
@@ -33,9 +39,12 @@
                     <thead class="table-dark">
 
                         <tr>
+                            <th>ID</th>
                             <th>Nombre</th>
+                            <th>Cédula</th>
+                            <th>Teléfono</th>
                             <th>Correo electrónico</th>
-                            <th>Tipo de cliente</th>
+                            <th>Acciones</th>
                         </tr>
 
                     </thead>
@@ -47,7 +56,19 @@
                         <tr>
 
                             <td>
+                                {{ cliente.id_cliente }}
+                            </td>
+
+                            <td>
                                 {{ cliente.nombre }}
+                            </td>
+
+                            <td>
+                                {{ cliente.cedula }}
+                            </td>
+
+                            <td>
+                                {{ cliente.telefono }}
                             </td>
 
                             <td>
@@ -56,22 +77,28 @@
 
                             <td>
 
-                                {% if cliente.tipo_cliente == "Frecuente" %}
+                                <a
+                                    href="{{ url_for('editar_cliente', id_cliente=cliente.id_cliente) }}"
+                                    class="btn btn-sm btn-warning"
+                                >
+                                    Editar
+                                </a>
 
-                                <span class="badge bg-success">
-                                    {{ cliente.tipo_cliente }}
-                                </span>
-
-                                {% else %}
-
-                                <span class="badge bg-primary">
-                                    {{ cliente.tipo_cliente }}
-                                </span>
-
-                                {% endif %}
+                                <form
+                                    action="{{ url_for('eliminar_cliente', id_cliente=cliente.id_cliente) }}"
+                                    method="POST"
+                                    class="d-inline"
+                                    onsubmit="return confirm('¿Está seguro de eliminar este cliente?');"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-danger"
+                                    >
+                                        Eliminar
+                                    </button>
+                                </form>
 
                             </td>
-
                         </tr>
 
                         {% endfor %}

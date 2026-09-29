@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, EmailField, SelectField, SubmitField
+from wtforms import StringField, EmailField, SubmitField
 from wtforms.validators import DataRequired, Length, Email
 
 
@@ -17,22 +17,32 @@ class ClienteForm(FlaskForm):
         ]
     )
 
-    correo = EmailField(
-        "Correo electrónico",
+    cedula = StringField(
+        "Cédula",
         validators=[
-            DataRequired(message="El correo electrónico es obligatorio."),
-            Email(message="Ingrese un correo electrónico válido.")
+            DataRequired(message="La cédula es obligatoria."),
+            Length(
+                min=10,
+                max=20,
+                message="La cédula debe tener entre 10 y 20 caracteres."
+            )
         ]
     )
 
-    tipo_cliente = SelectField(
-        "Tipo de cliente",
-        choices=[
-            ("Nuevo", "Nuevo"),
-            ("Frecuente", "Frecuente")
-        ],
+    telefono = StringField(
+        "Teléfono",
         validators=[
-            DataRequired(message="Seleccione un tipo de cliente.")
+            Length(
+                max=20,
+                message="El teléfono no puede superar los 20 caracteres."
+            )
+        ]
+    )
+
+    correo = EmailField(
+        "Correo electrónico",
+        validators=[
+            Email(message="Ingrese un correo electrónico válido.")
         ]
     )
 

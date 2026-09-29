@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Registrar Producto | D'Patty Confecciones{% endblock %}
-
+{% block title %}{{ titulo|default('Registrar producto') }} | D'Patty Confecciones{% endblock %}
 {% block content %}
 
 <section class="container py-5">
@@ -15,8 +14,10 @@
                 <div class="card-body p-4">
 
                     <h2 class="text-center mb-4">
-                        Registrar producto
+                        {{ titulo|default('Registrar producto') }}
                     </h2>
+                
+            
 
                     <form method="POST" novalidate>
 
@@ -97,9 +98,19 @@
                         <!-- BOTÓN -->
                         <div class="d-grid">
 
-                            {{ form.submit(class="btn btn-primary") }}
+                            {% if titulo == "Editar producto" %}
 
-                        </div>
+                                <button type="submit" class="btn btn-warning">
+                                     Guardar cambios
+                                </button>
+
+                            {% else %}
+
+                                    {{ form.submit(class="btn btn-primary") }}
+
+                            {% endif %}
+
+</div>
 
                     </form>
 

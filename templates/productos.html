@@ -64,6 +64,7 @@
                     <th>Descripción</th>
                     <th>Precio</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
 
             </thead>
@@ -75,7 +76,7 @@
                 <tr>
 
                     <td>
-                        {{ producto.id }}
+                        {{ producto.id_producto }}
                     </td>
 
                     <td>
@@ -108,7 +109,31 @@
 
                     </td>
 
+                    <td>
+
+                        <a
+                            href="{{ url_for('editar_producto', id_producto=producto.id_producto) }}"
+                            class="btn btn-sm btn-warning"
+                        >
+                            Editar
+                        </a>
+
+                    <form
+                        action="{{ url_for('eliminar_producto', id_producto=producto.id_producto) }}"
+                        method="POST"
+                        class="d-inline"
+                        onsubmit="return confirm('¿Está seguro de eliminar este producto?');"
+                    >
+                        <button
+                            type="submit"
+                            class="btn btn-sm btn-danger"
+                        >
+                            Eliminar
+                        </button>
+                    </form>
+
                 </tr>
+
 
                 {% endfor %}
 

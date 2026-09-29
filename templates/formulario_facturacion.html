@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}Registrar Factura | D'Patty Confecciones{% endblock %}
+{% block title %}
+{{ titulo if titulo else "Registrar Factura" }} | D'Patty Confecciones
+{% endblock %}
 
 {% block content %}
 
@@ -15,7 +17,7 @@
                 <div class="card-body p-4">
 
                     <h2 class="text-center mb-4">
-                        Registrar factura
+                        {{ titulo if titulo else "Registrar factura" }}
                     </h2>
 
                     <form method="POST" novalidate>
@@ -80,28 +82,6 @@
 
                         </div>
 
-
-                        <!-- TOTAL -->
-                        <div class="mb-3">
-
-                            {{ form.total.label(class="form-label") }}
-
-                            {{ form.total(
-                                class="form-control",
-                                step="0.01"
-                            ) }}
-
-                            {% for error in form.total.errors %}
-
-                            <div class="text-danger mt-1">
-                                {{ error }}
-                            </div>
-
-                            {% endfor %}
-
-                        </div>
-
-
                         <!-- ESTADO -->
                         <div class="mb-4">
 
@@ -120,10 +100,25 @@
                         </div>
 
 
+                        
                         <!-- BOTÓN -->
                         <div class="d-grid">
 
-                            {{ form.submit(class="btn btn-primary") }}
+                            {% if titulo == "Editar factura" %}
+
+                                {{ form.submit(
+                                    class="btn btn-warning",
+                                    value="Guardar cambios"
+                                ) }}
+
+                            {% else %}
+
+                                {{ form.submit(
+                                    class="btn btn-primary",
+                                    value="Registrar factura"
+                                ) }}
+
+                            {% endif %}
 
                         </div>
 
