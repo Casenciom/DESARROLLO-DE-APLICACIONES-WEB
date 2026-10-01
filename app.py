@@ -1,10 +1,18 @@
 from flask import Flask, render_template, redirect, url_for, flash, request
+from flask_login import LoginManager, login_user, logout_user, login_required
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
 from forms.producto_form import ProductoForm
 from forms.cliente_form import ClienteForm
 from forms.proveedor_form import ProveedorForm
 from forms.facturacion_form import FacturacionForm
-from conexion.conexion import obtener_conexion
+from forms.registro_form import RegistroForm
+from forms.login_form import LoginForm
 
+
+from conexion.conexion import obtener_conexion
+from models.usuario import Usuario
 
 
 app = Flask(__name__)
@@ -12,6 +20,171 @@ app = Flask(__name__)
 
 # Clave secreta utilizada por Flask-WTF para la protección CSRF
 app.config["SECRET_KEY"] = "dpatty-clave-secreta-2026"
+
+# Configuración de Flask-Login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+login_manager.login_message = "Debe iniciar sesión para acceder a esta página."
+login_manager.login_message_category = "warning"
+
+@login_manager.user_loader
+def load_user(user_id):
+
+    conexion = obtener_conexion()
+    cursor = conexion.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT id, usuario, password
+        FROM usuarios
+        WHERE id = %s
+    """, (user_id,))
+
+    usuario = cursor.fetchone()
+
+    cursor.close()
+    conexion.close()
+
+    if usuario:
+        return Usuario(
+            usuario["id"],
+            usuario["usuario"],
+            usuario["password"]
+        )
+
+    return None
+# Ruta para registrar usuarios
+@app.route("/registro", methods=["GET", "POST"])
+def registro():
+
+    form = RegistroForm()
+
+    if form.validate_on_submit():
+
+        conexion = obtener_conexion()
+        cursor = conexion.cursor(dictionary=True)
+
+        # Comprobar si el usuario ya existe
+        cursor.execute("""
+            SELECT id
+            FROM usuarios
+            WHERE usuario = %s
+        """, (form.usuario.data,))
+
+        usuario_existente = cursor.fetchone()
+
+        if usuario_existente:
+            cursor.close()
+            conexion.close()
+
+            flash(
+                "El nombre de usuario ya está registrado.",
+                "warning"
+            )
+
+            return render_template(
+                "registro.html",
+                form=form
+            )
+
+        # Generar hash de la contraseña
+        password_hash = generate_password_hash(
+            form.password.data
+        )
+
+        # Guardar usuario en MySQL
+        cursor.execute("""
+            INSERT INTO usuarios (usuario, password)
+            VALUES (%s, %s)
+        """, (
+            form.usuario.data,
+            password_hash
+        ))
+
+        conexion.commit()
+
+        cursor.close()
+        conexion.close()
+
+        flash(
+            "Usuario registrado correctamente.",
+            "success"
+        )
+
+        return redirect(url_for("login"))
+
+    return render_template(
+        "registro.html",
+        form=form
+    )
+
+# Ruta para iniciar sesión
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+
+        conexion = obtener_conexion()
+        cursor = conexion.cursor(dictionary=True)
+
+        # Buscar el usuario en la base de datos
+        cursor.execute("""
+            SELECT id, usuario, password
+            FROM usuarios
+            WHERE usuario = %s
+        """, (form.usuario.data,))
+
+        usuario = cursor.fetchone()
+
+        cursor.close()
+        conexion.close()
+
+        # Verificar usuario y contraseña
+        if usuario and check_password_hash(
+            usuario["password"],
+            form.password.data
+        ):
+
+            usuario_obj = Usuario(
+                usuario["id"],
+                usuario["usuario"],
+                usuario["password"]
+            )
+
+            login_user(usuario_obj)
+
+            flash(
+                "Inicio de sesión correcto.",
+                "success"
+            )
+
+            return redirect(url_for("inicio"))
+
+        flash(
+            "Usuario o contraseña incorrectos.",
+            "danger"
+        )
+
+    return render_template(
+        "login.html",
+        form=form
+    )
+
+# Ruta para cerrar sesión
+@app.route("/logout")
+def logout():
+    logout_user()
+
+    flash(
+        "Sesión cerrada correctamente.",
+        "success"
+    )
+
+    return redirect(url_for("login"))
+
+
 
 # Ruta principal
 @app.route("/")
@@ -21,6 +194,7 @@ def inicio():
 
 # Ruta de productos
 @app.route("/productos")
+@login_required
 def productos():
 
     conexion = obtener_conexion()
@@ -45,6 +219,7 @@ def productos():
 
 # Ruta para registrar productos
 @app.route("/productos/nuevo", methods=["GET", "POST"])
+@login_required
 def nuevo_producto():
 
     form = ProductoForm()
@@ -89,6 +264,7 @@ def nuevo_producto():
     
 # Ruta para editar producto
 @app.route("/productos/editar/<int:id_producto>", methods=["GET", "POST"])
+@login_required
 def editar_producto(id_producto):
 
     conexion = obtener_conexion()
@@ -155,6 +331,7 @@ def editar_producto(id_producto):
 
 # Ruta para eliminar producto
 @app.route("/productos/eliminar/<int:id_producto>", methods=["POST"])
+@login_required
 def eliminar_producto(id_producto):
 
     conexion = obtener_conexion()
@@ -180,6 +357,7 @@ def eliminar_producto(id_producto):
 # Ruta de clientes
 
 @app.route("/clientes")
+@login_required
 def clientes():
 
     conexion = obtener_conexion()
@@ -204,6 +382,7 @@ def clientes():
 
 # Ruta para registrar clientes
 @app.route("/clientes/nuevo", methods=["GET", "POST"])
+@login_required
 def nuevo_cliente():
 
     form = ClienteForm()
@@ -252,6 +431,7 @@ def nuevo_cliente():
 
 # Ruta para editar cliente
 @app.route("/clientes/editar/<int:id_cliente>", methods=["GET", "POST"])
+@login_required
 def editar_cliente(id_cliente):
 
     conexion = obtener_conexion()
@@ -318,6 +498,7 @@ def editar_cliente(id_cliente):
     
 # Ruta para eliminar cliente
 @app.route("/clientes/eliminar/<int:id_cliente>", methods=["POST"])
+@login_required
 def eliminar_cliente(id_cliente):
 
     conexion = obtener_conexion()
@@ -342,6 +523,7 @@ def eliminar_cliente(id_cliente):
 
 # Ruta de proveedores
 @app.route("/proveedores")
+@login_required
 def proveedores():
 
     conexion = obtener_conexion()
@@ -367,6 +549,7 @@ def proveedores():
 
 # Ruta para registrar proveedores
 @app.route("/proveedores/nuevo", methods=["GET", "POST"])
+@login_required
 def nuevo_proveedor():
 
     form = ProveedorForm()
@@ -413,6 +596,7 @@ def nuevo_proveedor():
     
 # Ruta para editar proveedor
 @app.route("/proveedores/editar/<int:id_proveedor>", methods=["GET", "POST"])
+@login_required
 def editar_proveedor(id_proveedor):
 
     conexion = obtener_conexion()
@@ -478,6 +662,7 @@ def editar_proveedor(id_proveedor):
     )
 # Ruta para eliminar proveedor
 @app.route("/proveedores/eliminar/<int:id_proveedor>", methods=["POST"])
+@login_required
 def eliminar_proveedor(id_proveedor):
 
     conexion = obtener_conexion()
@@ -505,6 +690,7 @@ def eliminar_proveedor(id_proveedor):
 
 # Ruta de facturación
 @app.route("/facturacion")
+@login_required
 def facturacion():
 
     conexion = obtener_conexion()
@@ -541,6 +727,7 @@ def facturacion():
 
 # Ruta para registrar facturación
 @app.route("/facturacion/nueva", methods=["GET", "POST"])
+@login_required
 def nueva_facturacion():
 
     form = FacturacionForm()
@@ -641,6 +828,7 @@ def nueva_facturacion():
 
 # Ruta para editar facturación
 @app.route("/facturacion/editar/<int:id_factura>", methods=["GET", "POST"])
+@login_required
 def editar_facturacion(id_factura):
 
     form = FacturacionForm()
@@ -778,6 +966,7 @@ def editar_facturacion(id_factura):
 
 # Ruta para eliminar facturación
 @app.route("/facturacion/eliminar/<int:id_factura>", methods=["POST"])
+@login_required
 def eliminar_facturacion(id_factura):
 
     conexion = obtener_conexion()

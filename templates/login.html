@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión | D'Patty Confecciones{% endblock %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-5">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h2 class="text-center mb-4">
+                        Iniciar sesión
+                    </h2>
+
+                    <form method="POST" novalidate>
+
+                        <!-- Token CSRF -->
+                        {{ form.hidden_tag() }}
+
+                        <!-- USUARIO -->
+                        <div class="mb-3">
+
+                            {{ form.usuario.label(class="form-label") }}
+
+                            {{ form.usuario(
+                                class="form-control",
+                                placeholder="Ingrese su usuario"
+                            ) }}
+
+                            {% for error in form.usuario.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- CONTRASEÑA -->
+                        <div class="mb-4">
+
+                            {{ form.password.label(class="form-label") }}
+
+                            {{ form.password(
+                                class="form-control",
+                                placeholder="Ingrese su contraseña"
+                            ) }}
+
+                            {% for error in form.password.errors %}
+                                <div class="text-danger mt-1">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- BOTÓN -->
+                        <div class="d-grid">
+
+                            {{ form.submit(
+                                class="btn btn-primary"
+                            ) }}
+
+                        </div>
+
+                    </form>
+
+                    <div class="text-center mt-3">
+
+                        <p class="mb-0">
+                            ¿No tiene una cuenta?
+
+                            <a href="{{ url_for('registro') }}">
+                                Registrarse
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

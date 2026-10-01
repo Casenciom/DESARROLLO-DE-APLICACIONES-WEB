@@ -64,3 +64,13 @@ CREATE TABLE facturas (
     FOREIGN KEY (id_producto)
         REFERENCES productos(id_producto)
 );
+
+-- =========================================
+-- TABLA USUARIOS
+-- =========================================
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);

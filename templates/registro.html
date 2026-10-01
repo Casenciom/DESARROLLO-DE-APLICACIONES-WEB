@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Registro | D'Patty Confecciones{% endblock %}
+
+{% block content %}
+
+<section class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8 col-lg-5">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h2 class="text-center mb-4">
+                        Crear cuenta
+                    </h2>
+
+                    <form method="POST" novalidate>
+
+                        <!-- Token CSRF -->
+                        {{ form.hidden_tag() }}
+
+                        <!-- USUARIO -->
+                        <div class="mb-3">
+
+                            {{ form.usuario.label(class="form-label") }}
+
+                            {{ form.usuario(
+                                class="form-control",
+                                placeholder="Ingrese un nombre de usuario"
+                            ) }}
+
+                            {% for error in form.usuario.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- CONTRASEÑA -->
+                        <div class="mb-3">
+
+                            {{ form.password.label(class="form-label") }}
+
+                            {{ form.password(
+                                class="form-control",
+                                placeholder="Ingrese una contraseña"
+                            ) }}
+
+                            {% for error in form.password.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- CONFIRMAR CONTRASEÑA -->
+                        <div class="mb-4">
+
+                            {{ form.confirmar_password.label(class="form-label") }}
+
+                            {{ form.confirmar_password(
+                                class="form-control",
+                                placeholder="Repita la contraseña"
+                            ) }}
+
+                            {% for error in form.confirmar_password.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+                        <!-- BOTÓN -->
+                        <div class="d-grid">
+
+                            {{ form.submit(
+                                class="btn btn-primary"
+                            ) }}
+
+                        </div>
+
+                    </form>
+
+                    <div class="text-center mt-3">
+
+                        <p class="mb-0">
+                            ¿Ya tiene una cuenta?
+
+                            <a href="{{ url_for('login') }}">
+                                Inicie sesión
+                            </a>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
