@@ -75,274 +75,612 @@
 
 <main class="container">
 
-    <!-- INICIO -->
-    <section id="inicio" class="text-center my-5">
-        <h2>Inicio</h2>
-        <p>
-            Bienvenido a D´Patty Confecciones, donde creamos prendas modernas,
-            elegantes y personalizadas.
-        </p>
+    <!-- HERO PRINCIPAL -->
+<section id="inicio" class="hero-dpatty">
 
-        <a href="#registro" class="btn btn-danger">
-            Registrar Producto
-        </a>
-    </section>
+    <div class="row g-0 align-items-stretch">
+
+        <!-- TEXTO -->
+        <div class="col-lg-6 hero-contenido">
+
+            <div class="hero-texto">
+
+                <span class="hero-etiqueta">
+                    
+                </span>
+
+                <h2>
+                    Moda, elegancia y
+                    <span>calidad en cada prenda</span>
+                </h2>
+
+                <p>
+                    Creamos prendas a medida y diseños personalizados,
+                    cuidando cada detalle para resaltar tu estilo
+                    y hacerte lucir especial.
+                </p>
+
+                <a href="{{ url_for('productos') }}"
+                   class="btn btn-dpatty">
+                    Ver productos
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- IMAGEN -->
+        <div class="col-lg-6 hero-imagen">
+
+            <img
+                src="{{ url_for('static', filename='img/vestido novia.jpg') }}"
+                alt="D'Patty Confecciones">
+
+        </div>
+
+    </div>
+
+</section>
 
     <!-- QUIÉNES SOMOS -->
-    <section id="quienes-somos" class="row align-items-center my-5">
+<section id="nosotros" class="nosotros-dpatty">
 
-        <div class="col-md-6">
-            <h2>Quiénes Somos</h2>
-            <p>
-                Somos una empresa dedicada al diseño y confección de prendas de vestir
-                con calidad, estilo y atención personalizada.
+    <div class="container">
+
+        <div class="nosotros-card">
+
+            <div class="row g-0 align-items-center">
+
+                <!-- TEXTO -->
+                <div class="col-lg-7">
+
+                    <div class="nosotros-contenido">
+
+                        <span class="seccion-etiqueta">
+                            Nuestra historia
+                        </span>
+
+                        <h2>Quiénes Somos</h2>
+
+                        <p>
+                            D’Patty Confecciones es un emprendimiento dedicado
+                            a la confección de prendas, enfocado en ofrecer diseños
+                            que combinan elegancia, calidad y atención personalizada.
+                        </p>
+
+                        <p>
+                            Nuestro propósito es crear prendas que respondan a los
+                            gustos y necesidades de cada cliente, cuidando cada
+                            detalle durante el proceso de confección.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- IMAGEN -->
+                <div class="col-lg-5">
+
+                    <div class="nosotros-imagen">
+
+                        <img
+                            src="{{ url_for('static', filename='img/nosotros.jpeg') }}"
+                            alt="Confección de prendas de vestir">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- SERVICIOS -->
+<section id="servicios" class="servicios-dpatty">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-6 col-lg-3">
+                <div class="servicio-item">
+                    <div class="servicio-icono">✂</div>
+
+                    <h5>Confección a medida</h5>
+
+                    <p>
+                        Prendas elaboradas especialmente para ti,
+                        considerando tus medidas y preferencias.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="servicio-item">
+                    <div class="servicio-icono">♡</div>
+
+                    <h5>Diseños personalizados</h5>
+
+                    <p>
+                        Creamos diseños únicos adaptados a tu estilo,
+                        ocasión y personalidad.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="servicio-item">
+                    <div class="servicio-icono">✓</div>
+
+                    <h5>Arreglos y ajustes</h5>
+
+                    <p>
+                        Realizamos modificaciones y ajustes en prendas
+                        para mejorar su talla, comodidad y presentación.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <div class="servicio-item">
+                    <div class="servicio-icono">☆</div>
+
+                    <h5>Atención personalizada</h5>
+
+                    <p>
+                        Te asesoramos durante todo el proceso para crear
+                        una prenda acorde con tus gustos y necesidades.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- NUESTRAS CONFECCIONES -->
+<section id="confecciones" class="confecciones-dpatty">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+            <span class="seccion-etiqueta">Nuestro trabajo</span>
+
+            <h2>Nuestras confecciones</h2>
+
+            <p class="seccion-descripcion">
+                Diseñamos y confeccionamos prendas pensadas
+                especialmente para cada ocasión.
             </p>
         </div>
 
-        <div class="col-md-6 text-center">
-            <img src="{{ url_for('static', filename='img/logopm.png') }}"
-                 alt="Confección de prendas de vestir"
-                 width="500"
-                 class="imagen-nosotros">
+
+        <div class="row g-4">
+
+            <!-- VESTIDOS -->
+            <div class="col-md-4">
+
+                <div class="confeccion-card">
+
+                    <img
+                        src="{{ url_for('static', filename='img/vestido 3 .jpg') }}"
+                        alt="Vestidos personalizados">
+
+                    <div class="confeccion-contenido">
+
+                        <h4>Vestidos personalizados</h4>
+
+                        <p>
+                            Diseños confeccionados a medida,
+                            cuidando cada detalle, acabado y estilo.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PAREJAS -->
+            <div class="col-md-4">
+
+                <div class="confeccion-card">
+
+                    <img
+                        src="{{ url_for('static', filename='img/parejas.JPG') }}"
+                        alt="Confección para parejas">
+
+                    <div class="confeccion-contenido">
+
+                        <h4>Confección para parejas</h4>
+
+                        <p>
+                            Prendas personalizadas y coordinadas
+                            para ocasiones especiales y celebraciones.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- UNIFORMES -->
+            <div class="col-md-4">
+
+                <div class="confeccion-card">
+
+                    <img
+                        src="{{ url_for('static', filename='img/uniformes.jpg') }}"
+                        alt="Uniformes personalizados">
+
+                    <div class="confeccion-contenido">
+
+                        <h4>Uniformes y conjuntos</h4>
+
+                        <p>
+                            Confección de prendas para empresas,
+                            instituciones y diferentes actividades.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-    </section>
+    </div>
 
-    <!-- SERVICIOS -->
-    <section id="servicios" class="my-5">
+</section>
 
-        <h2 class="text-center mb-4">Servicios y Productos</h2>
+<!-- POR QUÉ ELEGIRNOS -->
+<section id="elegirnos" class="elegirnos-dpatty">
 
-        <div class="row">
+    <div class="container">
 
+        <div class="text-center mb-5">
+
+            <span class="seccion-etiqueta">
+                Nuestra esencia
+            </span>
+
+            <h2>¿Por qué elegir D'Patty Confecciones?</h2>
+
+            <p class="seccion-descripcion">
+                Cada prenda es elaborada pensando en tus necesidades,
+                tu estilo y los detalles que hacen especial cada ocasión.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- ATENCIÓN -->
             <div class="col-md-4">
-                <div class="card p-3">
-                    <h5>Ropa personalizada</h5>
-                    <p>Diseños exclusivos según el cliente.</p>
+
+                <div class="elegir-item">
+
+                    <div class="elegir-icono">
+                        ♡
+                    </div>
+
+                    <h4>Atención personalizada</h4>
+
+                    <p>
+                        Escuchamos tus ideas y preferencias para crear
+                        prendas que reflejen tu estilo y se adapten
+                        a tus necesidades.
+                    </p>
+
                 </div>
+
             </div>
 
+
+            <!-- CALIDAD -->
             <div class="col-md-4">
-                <div class="card p-3">
-                    <h5>Uniformes</h5>
-                    <p>Confección de uniformes empresariales,escolares e institucionales.</p>
+
+                <div class="elegir-item">
+
+                    <div class="elegir-icono">
+                        ✓
+                    </div>
+
+                    <h4>Calidad en cada detalle</h4>
+
+                    <p>
+                        Cuidamos cada etapa de la confección,
+                        desde el diseño hasta los acabados,
+                        para obtener prendas de calidad.
+                    </p>
+
                 </div>
+
             </div>
 
+
+            <!-- EXPERIENCIA -->
             <div class="col-md-4">
-                <div class="card p-3">
-                    <h5>Arreglos</h5>
-                    <p>Modificación y ajustes de prendas.</p>
+
+                <div class="elegir-item">
+
+                    <div class="elegir-icono">
+                        ✦
+                    </div>
+
+                    <h4>Experiencia y dedicación</h4>
+
+                    <p>
+                        Trabajamos cada proyecto con dedicación,
+                        creatividad y atención para convertir
+                        tus ideas en prendas especiales.
+                    </p>
+
                 </div>
+
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
     <!-- CONTACTO -->
-    <section id="contacto" class="my-5">
+    
 
-        <h2 class="text-center">Contacto</h2>
-
-        <form>
-
-            <input type="text" class="form-control my-2" placeholder="Nombre">
-
-            <input type="email" class="form-control my-2" placeholder="Correo electrónico">
-
-            <input type="text" class="form-control my-2" placeholder="Asunto">
-
-            <textarea class="form-control my-2" rows="5" placeholder="Mensaje"></textarea>
-
-            <button type="submit" class="btn btn-danger">
-                Enviar mensaje
-            </button>
-
-        </form>
-
-        <div class="text-center mt-3">
-
-            <a href="https://www.tiktok.com/@patriciamaciasmodista?is_from_webapp=1&sender_device=pc" class="btn btn-primary m-1" target="_blank">TikTok</a>
-
-            <a href="https://www.facebook.com/depattyconfecciones" class="btn btn-primary m-1" target="_blank">Facebook</a>
-
-            <a href="https://www.instagram.com/atelier_pattyconfecciones?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn btn-danger m-1" target="_blank">Instagram</a>
-
-        </div>
-
+        
     </section>
 
     <section class="text-center my-5">
 
-    <h2>Video sobre confección textil</h2>
+    <!-- VIDEO -->
+<section id="video" class="video-dpatty">
 
-    <div class="ratio ratio-16x9">
-        <iframe 
-            src="https://www.youtube.com/embed/3Xr3E3t5D-k" 
-            title="Video sobre confección textil"
-            allowfullscreen>
-        </iframe>
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="seccion-etiqueta">
+                Conoce nuestro trabajo
+            </span>
+
+            <h2>El arte de la confección</h2>
+
+            <p class="seccion-descripcion">
+                Conoce un poco más sobre el proceso, la dedicación
+                y los detalles que forman parte de la confección textil.
+            </p>
+
+        </div>
+
+        <div class="video-contenedor">
+
+            <div class="ratio ratio-16x9">
+
+                <iframe
+                    src="https://www.youtube.com/embed/3Xr3E3t5D-k"
+                    title="Video sobre confección textil"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+        </div>
+
     </div>
 
 </section>
 
-<!-- REGISTRO DINÁMICO DE PRODUCTOS -->
-<section id="registro" class="my-5">
+<!-- UBICACIÓN -->
+<section id="ubicacion" class="ubicacion-dpatty">
 
-    <div class="card shadow-lg border-0">
+    <div class="container">
 
-        <div class="card-header bg-dark text-white text-center">
+        <div class="text-center mb-5">
 
-            <h2 class="mb-0">
-                Registrar Productos
-            </h2>
+            <span class="seccion-etiqueta">
+                Visítanos
+            </span>
+
+            <h2>Nuestra ubicación</h2>
+
+            <p class="seccion-descripcion">
+                Visítanos y conoce personalmente nuestro trabajo,
+                diseños y servicios de confección.
+            </p>
 
         </div>
 
-        <div class="card-body">
 
-            <form id="formProducto">
+        <div class="row g-4 align-items-stretch">
 
-                <div class="row">
+            <!-- INFORMACIÓN -->
+            <div class="col-lg-4">
 
-                    <!-- Nombre -->
+                <div class="ubicacion-info">
 
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">
-                            Nombre del producto
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nombre"
-                            class="form-control"
-                            placeholder="Ingrese el nombre del producto">
-
-                        <small id="errorNombre" class="text-danger"></small>
-
+                    <div class="ubicacion-icono">
+                        📍
                     </div>
 
-                    <!-- Categoría -->
+                    <h3>Patricia Macias Modista</h3>
 
-                    <div class="col-md-6 mb-3">
+                    <p>
+                        D'Patty Confecciones
+                    </p>
 
-                        <label class="form-label">
-                            Categoría
-                        </label>
+                    <p>
+                        Guayaquil, Ecuador
+                    </p>
 
-                        <select
-                            id="categoria"
-                            class="form-select">
+                    <a
+                        href="https://maps.app.goo.gl/JUqMeZHyhQhUQbXF6"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-dpatty">
 
-                            <option value="">Seleccione una categoría</option>
+                        Cómo llegar
 
-                            <option>Dama</option>
+                    </a>
 
-                            <option>Caballero</option>
+                </div>
 
-                            <option>Infantil</option>
+            </div>
 
-                            <option>Uniformes</option>
 
-                        </select>
+            <!-- MAPA -->
+            <div class="col-lg-8">
 
-                        <small id="errorCategoria" class="text-danger"></small>
+                <div class="mapa-dpatty">
 
+                    <iframe
+                        src="https://www.google.com/maps?q=-2.0896045,-79.9188097&z=17&output=embed"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación de Patricia Macias Modista">
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACTO Y REDES SOCIALES -->
+<section id="contacto" class="contacto-dpatty">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="seccion-etiqueta">
+                Estamos para ayudarte
+            </span>
+
+            <h2>Contáctanos</h2>
+
+            <p class="seccion-descripcion">
+                ¿Tienes una idea para una prenda especial?
+                Comunícate con nosotros y estaremos encantados
+                de ayudarte a hacerla realidad.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- INFORMACIÓN -->
+            <div class="col-lg-5">
+
+                <div class="contacto-info">
+
+                    <h3>D'Patty Confecciones</h3>
+
+                    <p>
+                        Diseño, confección y personalización
+                        de prendas para cada ocasión.
+                    </p>
+
+                    
+
+                    <div class="contacto-dato">
+                        <span>📱</span>
+                        <div>
+                            <strong>WhatsApp</strong>
+                            <p>0968963999</p>
+                        </div>
                     </div>
 
-                    <!-- Descripción -->
+                    <div class="contacto-dato">
+                        <span>✉</span>
+                        <div>
+                            <strong>Correo electrónico</strong>
+                            <p>pattyconfecciones@gmail.com</p>
+                        </div>
+                    </div>
 
-                    <div class="col-md-12">
+                </div>
 
-                        <label class="form-label">
-                            Descripción
-                        </label>
+            </div>
 
-                        <textarea
-                            id="descripcion"
-                            rows="4"
-                            class="form-control"
-                            placeholder="Describa el producto"></textarea>
 
-                        <small id="errorDescripcion" class="text-danger"></small>
+            <!-- REDES SOCIALES -->
+            <div class="col-lg-7">
+
+                <div class="redes-dpatty">
+
+                    <h3>Síguenos en nuestras redes</h3>
+
+                    <p>
+                        Conoce nuestros trabajos, diseños y
+                        novedades a través de nuestras redes sociales.
+                    </p>
+
+                    <div class="redes-botones">
+
+                        <a href="https://www.facebook.com/depattyconfecciones"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="red-social">
+
+                            <span>f</span>
+                            Facebook
+
+                        </a>
+
+                        <a href="https://www.instagram.com/atelier_pattyconfecciones/"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="red-social">
+
+                            <span>◎</span>
+                            Instagram
+
+                        </a>
+
+                        <a href="https://www.tiktok.com/@patriciamaciasmodista"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="red-social">
+
+                            <span>♪</span>
+                            TikTok
+
+                        </a>
 
                     </div>
 
                 </div>
 
-                <div class="mt-4">
-
-                    <button
-                        type="submit"
-                        class="btn btn-success">
-
-                        Registrar Producto
-
-                    </button>
-
-                </div>
-
-            </form>
+            </div>
 
         </div>
 
     </div>
-   
-      
-
-
-<div id="mensaje" class="mt-3"></div>
-
-<div id="spinner" class="text-center my-3 d-none">
-
-    <div class="spinner-border text-primary" role="status">
-
-        <span class="visually-hidden">
-            Cargando...
-        </span>
-
-    </div>
-
-    <p class="mt-2">
-
-        Registrando producto...
-
-    </p>
-
-</div>
-
-<h4 class="mt-4">
-    Total de productos:
-    <span id="total">0</span>
-</h4>
-    <hr class="my-5">
-
-        <!-- CONTENIDO DINÁMICO -->
-
-       <h3 class="text-center mb-4">
-
-        Productos Registrados
-
-        </h3>
-
-<p class="text-center text-muted">
-
-Los productos escogidos por los clientes se mostrarán aquí.
-
-</p>
-
-        <!-- Mensaje cuando no existan productos -->
-
-        <div id="estadoProductos"></div>
-
-        <!-- Las tarjetas se generan desde JavaScript -->
-
-        <div id="listaProductos" class="row"></div>
 
 </section>
 
+</section>
     
 </main>
 

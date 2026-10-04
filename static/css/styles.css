@@ -244,3 +244,867 @@ footer {
     }
 
 }
+
+
+/* ================================================= */
+/* NUEVO HERO - D'PATTY CONFECCIONES                 */
+/* ================================================= */
+
+.hero-dpatty {
+    padding: 0;
+    margin: 0;
+    background-color: #f9d9e6;
+    overflow: hidden;
+}
+
+.hero-dpatty .row {
+    min-height: 520px;
+}
+
+.hero-contenido {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(
+        135deg,
+        #f8d5e3 0%,
+        #f5c5d8 100%
+    );
+}
+
+.hero-texto {
+    max-width: 580px;
+    padding: 70px 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-etiqueta {
+    display: inline-block;
+    color: #9b3f6b;
+    font-weight: bold;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.hero-texto h2 {
+    font-size: 3.3rem;
+    line-height: 1.08;
+    font-weight: 700;
+    color: #202020;
+    margin-bottom: 22px;
+}
+
+.hero-texto h2 span {
+    color: #9b3f6b;
+}
+
+.hero-texto p {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: #4f4f4f;
+    margin-bottom: 30px;
+}
+
+.btn-dpatty {
+    background-color: #9b3f6b;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.btn-dpatty:hover {
+    background-color: #7e3156;
+    color: white;
+}
+
+.hero-imagen {
+    min-height: 520px;
+}
+
+.hero-imagen img {
+    width: 100%;
+    height: 100%;
+    min-height: 520px;
+    object-fit: cover;
+}
+
+
+/* HERO RESPONSIVE */
+
+@media (max-width: 991px) {
+
+    .hero-texto {
+        padding: 55px 35px;
+        text-align: center;
+    }
+
+    .hero-texto h2 {
+        font-size: 2.6rem;
+    }
+
+    .hero-imagen,
+    .hero-imagen img {
+        min-height: 350px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .hero-texto {
+        padding: 45px 22px;
+    }
+
+    .hero-texto h2 {
+        font-size: 2.1rem;
+    }
+
+    .hero-texto p {
+        font-size: 1rem;
+    }
+
+    .hero-imagen,
+    .hero-imagen img {
+        min-height: 280px;
+    }
+}
+
+
+/* ================================================= */
+/* SERVICIOS D'PATTY - 4 TARJETAS                    */
+/* ================================================= */
+
+.servicios-dpatty {
+    background-color: transparent;
+    padding: 55px 0;
+}
+
+.servicios-dpatty .row {
+    align-items: stretch;
+}
+
+.servicios-dpatty [class*="col-"] {
+    display: flex;
+}
+
+.servicio-item {
+    background-color: #fff9fb;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 30px 24px;
+
+    border: 2px solid #efb3cc;
+    border-radius: 22px;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.servicio-item:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+}
+
+.servicio-icono {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border: 2px solid #df7eaa;
+    border-radius: 50%;
+
+    color: #a83e70;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.servicio-item h5 {
+    color: #222;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.servicio-item p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+
+/* TABLET */
+
+@media (max-width: 991px) {
+
+    .servicio-item {
+        min-height: 230px;
+    }
+}
+
+
+/* CELULAR */
+
+@media (max-width: 576px) {
+
+    .servicios-dpatty {
+        padding: 35px 15px;
+    }
+
+    .servicios-dpatty .col-6 {
+        width: 100%;
+    }
+
+    .servicio-item {
+        min-height: auto;
+        text-align: center;
+    }
+
+    .servicio-icono {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+/* ================================================= */
+/* NUESTRAS CONFECCIONES                             */
+/* ================================================= */
+
+.confecciones-dpatty {
+    background-color: #fff7fa;
+    padding: 75px 0;
+}
+
+.seccion-etiqueta {
+    color: #a83e70;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.confecciones-dpatty h2 {
+    color: #222;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.seccion-descripcion {
+    color: #666;
+    max-width: 600px;
+    margin: 12px auto 0;
+}
+
+.confeccion-card {
+    background-color: #ffffff;
+    border-radius: 22px;
+    overflow: hidden;
+    height: 100%;
+
+    border: 1px solid #f1cfdd;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.09);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.confeccion-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.14);
+}
+
+.confeccion-card img {
+    width: 100%;
+    height: 320px;
+
+    object-fit: cover;
+    object-position: center;
+
+    display: block;
+}
+
+.confeccion-contenido {
+    padding: 25px;
+}
+
+.confeccion-contenido h4 {
+    color: #9b3f6b;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.confeccion-contenido p {
+    color: #555;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 767px) {
+
+    .confecciones-dpatty {
+        padding: 50px 15px;
+    }
+
+    .confecciones-dpatty h2 {
+        font-size: 1.9rem;
+    }
+
+    .confeccion-card img {
+        height: 300px;
+    }
+}
+
+/* ================================================= */
+/* POR QUÉ ELEGIR D'PATTY                            */
+/* ================================================= */
+
+.elegirnos-dpatty {
+    background-color: #ffffff;
+    padding: 75px 0;
+}
+
+.elegirnos-dpatty h2 {
+    color: #222;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.elegir-item {
+    background-color: #fff8fb;
+
+    height: 100%;
+    padding: 35px 30px;
+
+    border: 1px solid #f0cada;
+    border-radius: 22px;
+
+    text-align: center;
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.elegir-item:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 10px 22px
+                rgba(0, 0, 0, 0.10);
+}
+
+.elegir-icono {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    background-color: #f9dbe7;
+
+    border-radius: 50%;
+
+    color: #a83e70;
+
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.elegir-item h4 {
+    color: #9b3f6b;
+
+    font-size: 1.1rem;
+    font-weight: 700;
+
+    margin-bottom: 14px;
+}
+
+.elegir-item p {
+    color: #555;
+
+    font-size: 0.92rem;
+    line-height: 1.7;
+
+    margin-bottom: 0;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 767px) {
+
+    .elegirnos-dpatty {
+        padding: 50px 15px;
+    }
+
+    .elegirnos-dpatty h2 {
+        font-size: 1.9rem;
+    }
+}
+
+/* ================================================= */
+/* VIDEO D'PATTY                                     */
+/* ================================================= */
+
+.video-dpatty {
+    background-color: #fff7fa;
+    padding: 75px 0;
+}
+
+.video-dpatty h2 {
+    color: #222;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.video-contenedor {
+    max-width: 900px;
+    margin: 0 auto;
+
+    padding: 12px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #f0cada;
+    border-radius: 24px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+
+    overflow: hidden;
+}
+
+.video-contenedor .ratio {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+
+    .video-dpatty {
+        padding: 50px 15px;
+    }
+
+    .video-dpatty h2 {
+        font-size: 1.9rem;
+    }
+
+    .video-contenedor {
+        padding: 7px;
+        border-radius: 18px;
+    }
+}
+
+/* ================================================= */
+/* UBICACIÓN D'PATTY                                 */
+/* ================================================= */
+
+.ubicacion-dpatty {
+    background-color: #ffffff;
+    padding: 75px 0;
+}
+
+.ubicacion-dpatty h2 {
+    color: #222;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.ubicacion-info {
+    background-color: #fff7fa;
+
+    height: 100%;
+    min-height: 380px;
+
+    padding: 45px 35px;
+
+    border: 1px solid #f0cada;
+    border-radius: 22px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.ubicacion-icono {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    background-color: #f8d6e5;
+    border-radius: 50%;
+
+    font-size: 28px;
+}
+
+.ubicacion-info h3 {
+    color: #9b3f6b;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.ubicacion-info p {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.mapa-dpatty {
+    height: 100%;
+    min-height: 380px;
+
+    overflow: hidden;
+
+    border: 1px solid #f0cada;
+    border-radius: 22px;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+}
+
+.mapa-dpatty iframe {
+    display: block;
+    min-height: 380px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 991px) {
+
+    .ubicacion-info,
+    .mapa-dpatty,
+    .mapa-dpatty iframe {
+        min-height: 330px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .ubicacion-dpatty {
+        padding: 50px 15px;
+    }
+
+    .ubicacion-dpatty h2 {
+        font-size: 1.9rem;
+    }
+}
+
+/* ================================================= */
+/* CONTACTO Y REDES SOCIALES                         */
+/* ================================================= */
+
+.contacto-dpatty {
+    background-color: #fff7fa;
+    padding: 75px 0;
+}
+
+.contacto-dpatty h2 {
+    color: #222;
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.contacto-info,
+.redes-dpatty {
+    background-color: #ffffff;
+    height: 100%;
+
+    padding: 40px;
+
+    border: 1px solid #f0cada;
+    border-radius: 22px;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.contacto-info h3,
+.redes-dpatty h3 {
+    color: #9b3f6b;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.contacto-info > p,
+.redes-dpatty > p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+
+/* DATOS DE CONTACTO */
+
+.contacto-dato {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-top: 22px;
+}
+
+.contacto-dato > span {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background-color: #f8d6e5;
+    border-radius: 50%;
+
+    font-size: 20px;
+}
+
+.contacto-dato strong {
+    color: #333;
+}
+
+.contacto-dato p {
+    color: #666;
+    margin: 3px 0 0;
+}
+
+
+/* REDES */
+
+.redes-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.red-social {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    padding: 15px 20px;
+
+    color: #333;
+    background-color: #fff7fa;
+
+    border: 1px solid #efb3cc;
+    border-radius: 14px;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.red-social span {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #9b3f6b;
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.red-social:hover {
+    color: #9b3f6b;
+
+    transform: translateX(6px);
+
+    background-color: #fcebf2;
+
+    box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 767px) {
+
+    .contacto-dpatty {
+        padding: 50px 15px;
+    }
+
+    .contacto-dpatty h2 {
+        font-size: 1.9rem;
+    }
+
+    .contacto-info,
+    .redes-dpatty {
+        padding: 30px 22px;
+    }
+}
+
+/* ================================================= */
+/* QUIÉNES SOMOS                                     */
+/* ================================================= */
+
+.nosotros-dpatty {
+    padding: 70px 0;
+    background-color: transparent;
+}
+
+.nosotros-card {
+    background-color: #fff9fb;
+
+    border: 2px solid #efb3cc;
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.10);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.nosotros-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+
+/* TEXTO */
+
+.nosotros-contenido {
+    padding: 55px;
+}
+
+.nosotros-contenido h2 {
+    color: #222;
+
+    font-size: 2.3rem;
+    font-weight: 700;
+
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+
+.nosotros-contenido p {
+    color: #555;
+
+    font-size: 1rem;
+    line-height: 1.8;
+
+    margin-bottom: 15px;
+}
+
+
+/* IMAGEN */
+
+.nosotros-imagen {
+    height: 100%;
+    min-height: 400px;
+}
+
+.nosotros-imagen img {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 991px) {
+
+    .nosotros-contenido {
+        padding: 40px 30px;
+    }
+
+    .nosotros-imagen,
+    .nosotros-imagen img {
+        min-height: 330px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .nosotros-dpatty {
+        padding: 45px 15px;
+    }
+
+    .nosotros-contenido {
+        padding: 30px 22px;
+        text-align: center;
+    }
+
+    .nosotros-contenido h2 {
+        font-size: 1.9rem;
+    }
+
+    .nosotros-imagen,
+    .nosotros-imagen img {
+        min-height: 280px;
+    }
+}
+
+/* LOGO DEL NAVBAR */
+
+.logo-navbar {
+    height: 55px;
+    width: auto;
+    max-width: 300px;
+    object-fit: contain;
+    display: block;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+@media (max-width: 576px) {
+    .logo-navbar {
+        height: 45px;
+        max-width: 150px;
+    }
+}
