@@ -1,3 +1,7 @@
+import os
+
+from flask import Flask, render_template, redirect, url_for, flash, request
+
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,7 +23,7 @@ app = Flask(__name__)
 
 
 # Clave secreta utilizada por Flask-WTF para la protección CSRF
-app.config["SECRET_KEY"] = "dpatty-clave-secreta-2026"
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dpatty-clave-secreta-2026")
 
 # Configuración de Flask-Login
 login_manager = LoginManager()
