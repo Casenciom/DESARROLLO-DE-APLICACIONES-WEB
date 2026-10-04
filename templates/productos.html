@@ -63,6 +63,7 @@
                     <th>Producto</th>
                     <th>Descripción</th>
                     <th>Precio</th>
+                    <th>Proveedor</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
@@ -89,6 +90,10 @@
 
                     <td>
                         ${{ producto.precio }}
+                    </td>
+
+                    <td>
+                        {{ producto.proveedor if producto.proveedor else 'Sin proveedor' }}
                     </td>
 
                     <td>

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, DecimalField, BooleanField, SubmitField
+from wtforms import StringField, TextAreaField, DecimalField, BooleanField, SubmitField, SelectField
 from wtforms.validators import DataRequired, InputRequired, Length, NumberRange
 
 class ProductoForm(FlaskForm):
@@ -29,16 +29,24 @@ class ProductoForm(FlaskForm):
     )
 
     precio = DecimalField(
-    "Precio",
-    places=2,
-    validators=[
-        InputRequired(message="El precio es obligatorio."),
-        NumberRange(
-            min=0.01,
-            message="El precio debe ser mayor que 0."
-        )
-    ]
-)
+        "Precio",
+        places=2,
+        validators=[
+            InputRequired(message="El precio es obligatorio."),
+            NumberRange(
+                min=0.01,
+                message="El precio debe ser mayor que 0."
+            )
+        ]
+    )
+
+    proveedor = SelectField(
+        "Proveedor",
+        coerce=int,
+        validators=[
+            DataRequired(message="Debe seleccionar un proveedor.")
+        ]
+    )
 
     disponible = BooleanField(
         "Producto disponible"
