@@ -44,6 +44,27 @@
                         </div>
 
 
+                        <!-- DIRECCIÓN -->
+                        <div class="mb-3">
+
+                            {{ form.direccion.label(class="form-label") }}
+
+                            {{ form.direccion(
+                                class="form-control",
+                                placeholder="Ingrese la dirección del cliente"
+                            ) }}
+
+                            {% for error in form.direccion.errors %}
+
+                            <div class="text-danger mt-1">
+                                {{ error }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+
+
                         <!-- PRODUCTO -->
                         <div class="mb-3">
 
@@ -82,6 +103,7 @@
 
                         </div>
 
+
                         <!-- ESTADO -->
                         <div class="mb-4">
 
@@ -100,7 +122,6 @@
                         </div>
 
 
-                        
                         <!-- BOTÓN -->
                         <div class="d-grid">
 

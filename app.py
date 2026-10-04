@@ -756,20 +756,22 @@ def facturacion():
     cursor = conexion.cursor(cursor_factory=RealDictCursor)
 
     cursor.execute("""
-        SELECT
-            f.id_factura,
-            c.nombre AS cliente,
-            p.nombre AS producto,
-            f.cantidad,
-            f.total,
-            f.estado
-        FROM facturas f
-        INNER JOIN clientes c
-            ON f.id_cliente = c.id_cliente
-        INNER JOIN productos p
-            ON f.id_producto = p.id_producto
-        ORDER BY f.id_factura DESC
-    """)
+    SELECT
+        f.id_factura,
+        f.numero_factura,
+        c.nombre AS cliente,
+        f.direccion,
+        p.nombre AS producto,
+        f.cantidad,
+        f.total,
+        f.estado
+    FROM facturas f
+    INNER JOIN clientes c
+        ON f.id_cliente = c.id_cliente
+    INNER JOIN productos p
+        ON f.id_producto = p.id_producto
+    ORDER BY f.id_factura DESC
+""")
 
     lista_facturas = cursor.fetchall()
 
@@ -781,7 +783,6 @@ def facturacion():
         titulo="Registro de facturación",
         facturas=lista_facturas
     )
-
 
 
 # Ruta para registrar facturación
@@ -810,7 +811,7 @@ def nueva_facturacion():
         for cliente in clientes
     ]
 
-    # Obtener productos
+    # Obtener productos disponibles
     cursor.execute("""
         SELECT id_producto, nombre
         FROM productos
@@ -840,41 +841,80 @@ def nueva_facturacion():
         producto_seleccionado = cursor.fetchone()
 
         if producto_seleccionado is None:
+
             cursor.close()
             conexion.close()
 
-            flash("Producto no encontrado.", "danger")
+            flash(
+                "Producto no encontrado.",
+                "danger"
+            )
 
-            return redirect(url_for("nueva_facturacion"))
+            return redirect(
+                url_for("nueva_facturacion")
+            )
 
         # Calcular total automáticamente
         precio = producto_seleccionado["precio"]
-        total_calculado = precio * form.cantidad.data
 
-        # Guardar factura
+        total_calculado = (
+            precio * form.cantidad.data
+        )
+
+        # Registrar factura
         cursor.execute("""
             INSERT INTO facturas
-            (id_cliente, id_producto, cantidad, total, estado)
-            VALUES (%s, %s, %s, %s, %s)
+            (
+                id_cliente,
+                id_producto,
+                direccion,
+                cantidad,
+                total,
+                estado
+            )
+            VALUES (%s, %s, %s, %s, %s, %s)
+            RETURNING id_factura
         """, (
             form.cliente.data,
             form.producto.data,
+            form.direccion.data,
             form.cantidad.data,
             total_calculado,
             form.estado.data
         ))
 
+        # Obtener ID generado por PostgreSQL
+        factura_creada = cursor.fetchone()
+
+        id_factura = factura_creada["id_factura"]
+
+        # Generar número de factura automático
+        numero_factura = f"FAC-{id_factura:06d}"
+
+        # Guardar número de factura
+        cursor.execute("""
+            UPDATE facturas
+            SET numero_factura = %s
+            WHERE id_factura = %s
+        """, (
+            numero_factura,
+            id_factura
+        ))
+
+        # Confirmar cambios
         conexion.commit()
 
         cursor.close()
         conexion.close()
 
         flash(
-            "Factura registrada correctamente.",
+            f"Factura {numero_factura} registrada correctamente.",
             "success"
         )
 
-        return redirect(url_for("facturacion"))
+        return redirect(
+            url_for("facturacion")
+        )
 
     cursor.close()
     conexion.close()
@@ -883,7 +923,6 @@ def nueva_facturacion():
         "formulario_facturacion.html",
         form=form
     )
-    
 
 # Ruta para editar facturación
 @app.route("/facturacion/editar/<int:id_factura>", methods=["GET", "POST"])
@@ -899,8 +938,10 @@ def editar_facturacion(id_factura):
     cursor.execute("""
         SELECT
             id_factura,
+            numero_factura,
             id_cliente,
             id_producto,
+            direccion,
             cantidad,
             estado
         FROM facturas
@@ -951,6 +992,7 @@ def editar_facturacion(id_factura):
     if request.method == "GET":
 
         form.cliente.data = factura["id_cliente"]
+        form.direccion.data = factura["direccion"]
         form.producto.data = factura["id_producto"]
         form.cantidad.data = factura["cantidad"]
         form.estado.data = factura["estado"]
@@ -968,10 +1010,14 @@ def editar_facturacion(id_factura):
         producto_seleccionado = cursor.fetchone()
 
         if producto_seleccionado is None:
+
             cursor.close()
             conexion.close()
 
-            flash("Producto no encontrado.", "danger")
+            flash(
+                "Producto no encontrado.",
+                "danger"
+            )
 
             return redirect(
                 url_for(
@@ -989,6 +1035,7 @@ def editar_facturacion(id_factura):
             UPDATE facturas
             SET id_cliente = %s,
                 id_producto = %s,
+                direccion = %s,
                 cantidad = %s,
                 total = %s,
                 estado = %s
@@ -996,6 +1043,7 @@ def editar_facturacion(id_factura):
         """, (
             form.cliente.data,
             form.producto.data,
+            form.direccion.data,
             form.cantidad.data,
             total_calculado,
             form.estado.data,
@@ -1008,11 +1056,13 @@ def editar_facturacion(id_factura):
         conexion.close()
 
         flash(
-            "Factura actualizada correctamente.",
+            f"Factura {factura['numero_factura']} actualizada correctamente.",
             "success"
         )
 
-        return redirect(url_for("facturacion"))
+        return redirect(
+            url_for("facturacion")
+        )
 
     cursor.close()
     conexion.close()

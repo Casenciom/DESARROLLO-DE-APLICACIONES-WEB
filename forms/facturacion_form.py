@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import SelectField, IntegerField, SubmitField
-from wtforms.validators import DataRequired, NumberRange, ValidationError
+from wtforms import SelectField, IntegerField, SubmitField, StringField
+from wtforms.validators import DataRequired, NumberRange, Length
+
 
 class FacturacionForm(FlaskForm):
 
@@ -10,6 +11,17 @@ class FacturacionForm(FlaskForm):
         coerce=int,
         validators=[
             DataRequired(message="Seleccione un cliente.")
+        ]
+    )
+
+    direccion = StringField(
+        "Dirección",
+        validators=[
+            DataRequired(message="La dirección es obligatoria."),
+            Length(
+                max=200,
+                message="La dirección no puede superar los 200 caracteres."
+            )
         ]
     )
 
@@ -33,8 +45,6 @@ class FacturacionForm(FlaskForm):
         ]
     )
 
-    
-
     estado = SelectField(
         "Estado",
         choices=[
@@ -49,4 +59,3 @@ class FacturacionForm(FlaskForm):
     submit = SubmitField(
         "Registrar factura"
     )
-    
