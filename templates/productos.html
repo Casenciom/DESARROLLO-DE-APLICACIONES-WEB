@@ -2,34 +2,6 @@
 
 {% block content %}
 
-{% with mensajes = get_flashed_messages(with_categories=true) %}
-
-    {% if mensajes %}
-
-        {% for categoria, mensaje in mensajes %}
-
-            <div class="container mt-4">
-                <div class="alert alert-{{ categoria }} alert-dismissible fade show" role="alert">
-
-                    {{ mensaje }}
-
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Cerrar">
-                    </button>
-
-                </div>
-            </div>
-
-        {% endfor %}
-
-    {% endif %}
-
-{% endwith %}
-
-
 
 <div class="container py-5">
 
